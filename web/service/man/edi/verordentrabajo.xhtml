@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcFirmarPeticion" message="¿Está seguro de querer firmar la petición? Ya no podrá modificarla y será enviada al técnico correspondiente" acceptLabel="FIRMAR PETICION" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcFirmarEntrega" message="¿Está seguro de querer firmar la entrega? Esto indicará que la solicitud de apoyo técnico a finalizado" acceptLabel="FIRMAR ENTREGA" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcEntregarResultados" message="¿Ha finalizado la tarea?" acceptLabel="Sí" cancelLabel="NO"/>
+                
+                <ice:panelLayout layout="flow">
+                    <ice:panelLayout layout="flow" style="text-align:right;">
+
+                        <h:panelGroup rendered="#{manedi.tecnico and manedi.ordenTrabajoMantenimiento.solicitada}">
+                                <ice:commandButton action="#{manedi.comenzarEstudio}" value="COMENZAR TRABAJO" immediate="true"/>
+                                <ice:commandButton action="#{manedi.revisarOrdenTrabajoSetup}" value="Revisar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{manedi.tecnico and manedi.ordenTrabajoMantenimiento.enEstudio}">
+                                <ice:commandButton action="#{manedi.entregarMuestras}" value="FINALIZAR TRABAJO" immediate="true" panelConfirmation="pcEntregarResultados"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{login.investigador and manedi.ordenTrabajoMantenimiento.rellenando}">
+                                <ice:commandButton action="#{manedi.firmarPeticion}" value="FIRMAR PETICION" immediate="true" panelConfirmation="pcFirmarPeticion"/>
+                                <ice:commandButton action="#{manedi.editarSetup}" value="Editar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{login.investigador and manedi.ordenTrabajoMantenimiento.resultadosEntregados}">
+                                <ice:commandButton action="#{manedi.firmarEntrega}" value="FIRMAR ENTREGA" immediate="true" panelConfirmation="pcFirmarEntrega"/>
+                        </h:panelGroup>
+
+                        <ice:commandButton action="#{manedi.listSetup}" value="Salir" immediate="true"/>
+
+                    </ice:panelLayout>
+                    
+                    <table><tr><td valign="bottom" style="font-size:large;font-weight:bold;">SOLICITUD DE APOYO TÉCNICO</td></tr></table>
+                    <br/><br/>
+                    <ice:outputText value="Estado: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.estado}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Fecha solicitud: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.fechasolicitud}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha inicio del trabajo: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.fechainicioestudio}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha entrega del trabajo: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.fechaentregaresultados}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha confirmacion fin trabajo: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.fechafirmaentregadatos}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <h:panelGroup rendered="#{not empty manedi.ordenTrabajoMantenimiento.registroFirmaPeticion}">
+                        <ice:outputText value="Registro firma petición: "/>
+                        <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.registroFirmaPeticion}" style="font-weight:bold;"/>
+                        <hr/>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{not empty manedi.ordenTrabajoMantenimiento.registroFirmaEntrega}">
+                        <ice:outputText value="Registro firma entrega: "/>
+                        <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.registroFirmaEntrega}" style="font-weight:bold;"/>
+                        <hr/>
+                    </h:panelGroup>
+
+                    <ice:outputText value="Nº solicitud de trabajo: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.numordentrabajo}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Solicitante: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.solicitante.apellidos}, #{manedi.ordenTrabajoMantenimiento.solicitante.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Nombre: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Tipo de trabajo solicitado: "/>
+                    <ice:outputText value="#{manedi.ordenTrabajoMantenimiento.descripcion}" style="font-weight:bold;"/>
+                   
+                </ice:panelLayout>
+
+                <br/><br/>
+
+                <h:panelGroup rendered="#{manedi.tecnico and manedi.ordenTrabajoMantenimiento.solicitada}">
+                        <img alt="Estado solicitado"  src="/iact-adm/css/estados/lab/2.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que COMIENCE EL ESTUDIO" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{manedi.tecnico and manedi.ordenTrabajoMantenimiento.enEstudio}">
+                    <img alt="Estado en Fase de Estudio"  src="/iact-adm/css/estados/lab/4.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que ENTREGUE LOS DATOS AL INVESTIGADOR" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{manedi.tecnico and manedi.ordenTrabajoMantenimiento.resultadosEntregados}">
+                    <img alt="Estado con Datos Entregados"  src="/iact-adm/css/estados/lab/5.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el investigador confirme la entrega de los datos" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{manedi.tecnico and manedi.ordenTrabajoMantenimiento.finalizada}">
+                    <img alt="Estado Finalizada"  src="/iact-adm/css/estados/lab/6.png" width="800"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and manedi.ordenTrabajoMantenimiento.rellenando}">
+                    <img alt="Estado Rellenando"  src="/iact-adm/css/estados/lab/1.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que FIRME PETICION" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and manedi.ordenTrabajoMantenimiento.solicitada}">
+                    <img alt="Estado Solicitado"  src="/iact-adm/css/estados/lab/2.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el técnico comience el estudio" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and manedi.ordenTrabajoMantenimiento.enEstudio}">
+                    <img alt="Estado en Fase de Estudio"  src="/iact-adm/css/estados/lab/4.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el técnico entregue los datos" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and manedi.ordenTrabajoMantenimiento.resultadosEntregados}">
+                    <img alt="Estado Datos Entregados"  src="/iact-adm/css/estados/lab/5.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que FIRME ENTREGA" style="color:red;"/>
+                </h:panelGroup>
+
+
+                <h:panelGroup rendered="#{login.investigador and manedi.ordenTrabajoMantenimiento.finalizada}">
+                    <img alt="Estado Finalizada"  src="/iact-adm/css/estados/lab/6.png" width="800"/>
+                </h:panelGroup>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

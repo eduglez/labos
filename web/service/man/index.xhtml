@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+    <ui:composition template="/templates/template.xhtml">
+
+
+            <ui:define name="body">
+
+            <h2><ice:outputText value="Mantenimiento"/></h2>
+            <h3><ice:commandLink value="#{manedi.tecnica.nombre}" action="tecnica-manedi" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{manedi.tecnica.responsableTecnico.apellidos}, #{manedi.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{manedi.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{manedi.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><ice:outputText value="#{manedi.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{manedi.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+
+            <h3><ice:commandLink value="#{manveh.tecnica.nombre}" action="tecnica-manveh" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{manveh.tecnica.responsableTecnico.apellidos}, #{manveh.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{manveh.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{manveh.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><ice:outputText value="#{manveh.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{manveh.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+            </ui:define>
+
+        </ui:composition>
+    
+</html>
+

@@ -1,0 +1,154 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+
+	font-weight: lighter;
+	color: #CCC;
+	text-transform: none;
+	padding: 10px;
+}
+#header {
+	width: 100%;
+	background-color: #333;
+}
+div.subheader h2 {
+	padding: 8px;
+}
+
+.subheader{
+    width: 100%;
+    background-color: #CCC;
+}
+.services{
+    padding: 1em;
+}
+
+.columnaNavegador {
+    vertical-align: top;
+    width:275px;
+    padding-left:0px;
+}
+
+.columnaContenido{
+    vertical-align: top;
+}
+
+.header{
+    margin-bottom:20px;
+
+}
+
+.loginBox{
+    border: rgb(255,153,0) 2px solid;
+	width:255px;
+	padding:5px;
+
+}
+
+.textoMarcado {
+    color:black;
+
+}
+
+.errorImagen{
+    background-image: url(http://localhost:8080/iact-adm/css/warn.png); display: block; width: 64px; height: 32px; background-repeat: no-repeat; background-position: 0px 0px;
+}
+
+
+.eventoNormal{
+    color:black;
+}
+
+.eventoGris{
+    color:grey;
+}
+
+table.listado
+{
+border-collapse:collapse;
+}
+table.listado,th.listado, td.listado
+{
+    border: 1px solid grey;
+}
+
+td.listado,th.listado
+{
+    padding: 10px;
+    text-align: left;
+}
+
+td.numero{
+    text-align: right;
+    border: 1px solid grey;
+    padding-right: 3px;
+}
+
+th.listado{
+    text-align: left;
+}
+
+
+
+
+tr.tituloTabla {
+
+	color: #4C4C4C;
+
+	font-weight: bold;
+	font-style: normal;
+
+	text-align: center;
+}
+
+tr.personal {
+	background-color: #E1E1E1;
+	color: #616161;
+}
+tr.personalTitulo {
+	background-color: #E1E1E1;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.gastosEjecucion {
+	color: #616161;
+	background-color: #EEEEEE;
+}
+
+tr.gastosEjecucionTitulo {
+	background-color: #EEEEEE;
+
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.costesIndirectos {
+	color: #616161;
+	background-color: #C7C7C7;
+}
+
+tr.costesIndirectosTitulo {
+	background-color: #C7C7C7;
+	font-size: large;
+	font-weight: bolder;
+}
+
+tr.totales {
+
+	font-weight: bold;
+	font-style: italic;
+
+	font-size: x-large;
+}
+td.total{
+	text-align: right;
+	font-weight: bold;
+}
+input.valorEntrada {
+	text-align: right;
+	font-weight: 100;
+
+}

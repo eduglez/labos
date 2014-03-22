@@ -1,0 +1,11 @@
+*.class
+.classpath
+.project
+.settings/
+build/
+dist/
+build.xml
+nbproject/
+*~
+\#*#
+bin/

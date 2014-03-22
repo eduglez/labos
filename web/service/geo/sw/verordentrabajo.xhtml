@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcFirmarPeticion" message="¿Está seguro de querer firmar la petición? Ya no podrá modificarla y será enviada al técnico correspondiente" acceptLabel="FIRMAR PETICION" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcFirmarEntrega" message="¿Está seguro de querer firmar la entrega? Esto indicará que la solicitud de apoyo técnico a finalizado" acceptLabel="FIRMAR ENTREGA" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcEntregarResultados" message="¿Ha subido todos los resultados?" acceptLabel="Sí" cancelLabel="NO"/>
+                <ice:panelConfirmation id="pcReiniciarEstudio" message="¿Realmente desea reiniciar el estudio?" acceptLabel="Sí" cancelLabel="NO"/>
+
+                <ice:panelLayout layout="flow">
+                    <ice:panelLayout layout="flow" style="text-align:right;">
+
+                        <h:panelGroup rendered="#{geosw.tecnico and geosw.ordenTrabajoLab.solicitada}">
+                                <ice:commandButton action="#{geosw.comenzarEstudio}" value="COMENZAR ESTUDIO" immediate="true"/>
+                                <ice:commandButton action="#{geosw.revisarOrdenTrabajoSetup}" value="Revisar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{geosw.tecnico and geosw.ordenTrabajoLab.enEstudio}">
+                                <ice:commandButton action="#{geosw.entregarMuestras}" value="ENTREGAR MUESTRAS" immediate="true" panelConfirmation="pcEntregarResultados"/>
+                        </h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{geosw.tecnico and geosw.ordenTrabajoLab.resultadosEntregados}">
+                                <ice:commandButton action="#{geosw.reiniciarEstudio}" value="REINICAR ESTUDIO" immediate="true" panelConfirmation="pcReiniciarEstudio"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{login.investigador and geosw.ordenTrabajoLab.rellenando}">
+                        
+                                <ice:commandButton action="#{geosw.firmarPeticion}" value="FIRMAR PETICION" immediate="true" panelConfirmation="pcFirmarPeticion"/>
+                                <ice:commandButton action="#{geosw.editarSetup}" value="Editar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{login.investigador and geosw.ordenTrabajoLab.resultadosEntregados}">
+                                <ice:commandButton action="#{geosw.firmarEntrega}" value="FIRMAR ENTREGA" immediate="true" panelConfirmation="pcFirmarEntrega"/>
+                        </h:panelGroup>
+
+                        <ice:commandButton action="#{geosw.listSetup}" value="Salir" immediate="true"/>
+
+                    </ice:panelLayout>
+
+                    <table><tr><td valign="bottom" style="font-size:large;font-weight:bold;">SOLICITUD DE APOYO TÉCNICO</td><td><ice:outputResource mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" resource="#{geosw.ordenPedidoWordProcessingML}" label="Descargar Solicitud de Apoyo Técnico en Word" attachment="true" image="/css/Word.png" /></td></tr></table>
+                    <br/><br/>
+                    <ice:outputText value="Estado: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.estado}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Fecha solicitud: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.fechasolicitud}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha inicio del estudio: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.fechainicioestudio}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha entrega de resultados: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.fechaentregaresultados}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha confirmacion entrega resultados: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.fechafirmaentregadatos}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <h:panelGroup rendered="#{not empty geosw.ordenTrabajoLab.registroFirmaPeticion}">
+
+                        <ice:outputText value="Registro firma petición: "/>
+                        <ice:outputText value="#{geosw.ordenTrabajoLab.registroFirmaPeticion}" style="font-weight:bold;"/>
+                        <hr/>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{not empty geosw.ordenTrabajoLab.registroFirmaEntrega}">
+                        <ice:outputText value="Registro firma entrega: "/>
+                        <ice:outputText value="#{geosw.ordenTrabajoLab.registroFirmaEntrega}" style="font-weight:bold;"/>
+                        <hr/>
+                    </h:panelGroup>
+
+
+                    <ice:outputText value="Nº solicitud de trabajo: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.numordentrabajo}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Proyecto: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.proyecto.referencia} - #{geosw.ordenTrabajoLab.investigadorPrincipal}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Nombre: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Tipo de trabajo solicitado: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.descripcion}" style="font-weight:bold;"/>
+                    <hr/>
+
+                    <br/>
+                    <h3>Resultados y Documentos</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Nombre fichero</th>
+                            <th style="font-weight:normal; text-align:left;">Fecha</th>
+                        </tr>
+                        <ui:repeat value="#{geosw.resultadoResources}" var="resultado">
+                            <tr>
+                                <td>
+                                    <ice:outputResource resource="#{resultado}" label="#{resultado.nombreDocumento}" type="link" attachment="true" style="font-weight:bold;text-decoration:underline;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{resultado.fechaFichero}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                                    </ice:outputText>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                    <ace:fileEntry id="subida" absolutePath="#{geosw.directorioResultados}" fileEntryListener="#{geosw.uploaded}" rendered="#{geosw.tecnico and (geosw.ordenTrabajoLab.enEstudio or geosw.ordenTrabajoLab.resultadosEntregados)}" useOriginalFilename="true" useSessionSubdir="false"/>
+                    <h:commandButton value="Subir" rendered="#{geosw.tecnico and (geosw.ordenTrabajoLab.enEstudio or geosw.ordenTrabajoLab.resultadosEntregados)}"/>
+                    <br/>
+                    <h3>Trabajos</h3>
+                    <ice:outputText value="Total: "/>
+                    <ice:outputText value="#{geosw.ordenTrabajoLab.totalTrabajos}" converter="EuroCurrencyConverter" style="font-weight:bold;"/>
+                    <ice:outputText value=" (#{geosw.ordenTrabajoLab.numTrabajos} trabajos)" style="font-weight:bold;"/>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Nº</th>
+                            <th style="font-weight:normal; text-align:left;">Muestra</th>
+                            <th style="font-weight:normal; text-align:left;">Cod. Trabajo</th>
+                            <th style="font-weight:normal; text-align:left;">Concepto</th>
+                            <th style="font-weight:normal; text-align:left;">Precio</th>
+                        </tr>
+                        <ui:repeat value="#{geosw.ordenTrabajoLab.trabajos}" var="trabajo">
+                            <tr style="background-color:#{trabajo.cssColor};">
+                                <td>
+                                    <ice:outputText value="#{trabajo.num}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{trabajo.muestra}" style="font-weight:bold;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{trabajo.trabajo.codigo}" style="font-weight:bold;"/>
+                                </td>
+
+                                <td>
+                                    <ice:outputText value="#{trabajo.trabajo.concepto}" style="font-weight:bold;"/> <ice:outputText value="(#{trabajo.concepto})" style="font-weight:bold;" rendered="#{trabajo.trabajoNoRegistrado}"/>
+                                </td>
+
+                                <td>
+                                    <ice:outputText value="#{trabajo.trabajo.precioActualCsic}" style="font-weight:bold;" converter="EuroCurrencyConverter" rendered="#{not trabajo.trabajoNoRegistrado}"/>
+                                    <ice:outputText value="#{trabajo.precio}" style="font-weight:bold;" converter="EuroCurrencyConverter" rendered="#{trabajo.trabajoNoRegistrado}"/>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+
+                </ice:panelLayout>
+
+                <br/><br/>
+                <h:panelGroup rendered="#{geosw.tecnico and geosw.ordenTrabajoLab.solicitada}">
+                        <img src="/iact-adm/css/estados/lab/2.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que COMIENCE EL ESTUDIO" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{geosw.tecnico and geosw.ordenTrabajoLab.enEstudio}">
+                        <img src="/iact-adm/css/estados/lab/4.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que ENTREGUE LOS DATOS AL INVESTIGADOR" style="color:red;"/>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{geosw.tecnico and geosw.ordenTrabajoLab.resultadosEntregados}">
+                        <img src="/iact-adm/css/estados/lab/5.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el investigador confirme la entrega de los datos" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{geosw.tecnico and geosw.ordenTrabajoLab.finalizada}">
+                        <img src="/iact-adm/css/estados/lab/6.png" width="800"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and geosw.ordenTrabajoLab.rellenando}">
+                        <img src="/iact-adm/css/estados/lab/1.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que FIRME PETICION" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and geosw.ordenTrabajoLab.solicitada}">
+                        <img src="/iact-adm/css/estados/lab/2.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el técnico comience el estudio" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and geosw.ordenTrabajoLab.enEstudio}">
+                        <img src="/iact-adm/css/estados/lab/4.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el técnico entregue los datos" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and geosw.ordenTrabajoLab.resultadosEntregados}">
+                        <img src="/iact-adm/css/estados/lab/5.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que FIRME ENTREGA" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and geosw.ordenTrabajoLab.finalizada}">
+                        <img src="/iact-adm/css/estados/lab/6.png" width="800"/>
+                </h:panelGroup>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

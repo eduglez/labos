@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:dia="http://java.sun.com/jsf/composite/calendario/diacalendario">
+
+    <!-- INTERFACE -->
+    <cc:interface displayName="Calendario de eventos">
+        <cc:attribute name="calendario" required="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <table width="300">
+            <tr><td style="text-align:center;"><ice:commandLink value="Ant" action="#{cc.attrs.calendario.irMesAnterior}" style="text-decoration: underline"/></td><td style="text-align:center;"><h:outputText value="#{cc.attrs.calendario.mesActual}" style="font-weight:bold"/></td><td style="text-align:center;"><ice:commandLink value="Sig" action="#{cc.attrs.calendario.irMesSiguiente}" style="text-decoration: underline"/></td></tr>
+            </table>
+
+            <table border="1">
+                <thead>
+                    <tr bgcolor="#527396" style="color:white">
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                    <th>Sábado</th>
+                    <th>Domingo</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <ui:repeat value="#{cc.attrs.calendario.eventos}" var="evento" offset="0" size="6">
+                <dia:diaCalendario diaCalendario="#{evento}"/>
+            </ui:repeat>
+            </tr>
+
+            <tr>
+            <ui:repeat value="#{cc.attrs.calendario.eventos}" var="evento" offset="7" size="13">
+                <dia:diaCalendario diaCalendario="#{evento}"/>
+            </ui:repeat>
+            </tr>
+            <tr>
+            <ui:repeat value="#{cc.attrs.calendario.eventos}" var="evento" offset="14" size="20">
+                <dia:diaCalendario diaCalendario="#{evento}"/>
+            </ui:repeat>
+            </tr>
+            <tr>
+            <ui:repeat value="#{cc.attrs.calendario.eventos}" var="evento" offset="21" size="27">
+                <dia:diaCalendario diaCalendario="#{evento}"/>
+            </ui:repeat>
+            </tr>
+            <tr>
+            <ui:repeat value="#{cc.attrs.calendario.eventos}" var="evento" offset="28" size="34">
+                <dia:diaCalendario diaCalendario="#{evento}"/>
+            </ui:repeat>
+            </tr>
+            <tr>
+            <ui:repeat value="#{cc.attrs.calendario.eventos}" var="evento" offset="35" size="41">
+                <dia:diaCalendario diaCalendario="#{evento}"/>
+            </ui:repeat>
+            </tr>
+            </tbody>
+        </table>
+    </cc:implementation>
+</html>

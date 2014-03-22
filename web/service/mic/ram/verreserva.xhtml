@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcFirmarPeticion" message="¿Está seguro de querer firmar la petición? Ya no podrá modificarla y será enviada al responsable pertinente" acceptLabel="FIRMAR PETICION" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcAceptarPeticion" message="¿Está seguro de querer ACEPTAR la petición?" acceptLabel="SI" cancelLabel="No" />
+                <ice:panelConfirmation id="pcCancelarPeticion" message="¿Está seguro de querer CANCELAR la petición?" acceptLabel="SI" cancelLabel="No" />
+
+                <ice:panelLayout layout="flow" style="text-align:right;">
+                        <h:panelGroup rendered="#{micspc.tecnico and micspc.reserva.solicitada}">
+                                <ice:commandButton action="#{micspc.aceptarPeticion}" value="ACEPTAR PETICIÓN" immediate="true" panelConfirmation="pcAceptarPeticion"/>
+                                <ice:commandButton action="#{micspc.cancelarPeticion}" value="DENEGAR PETICIÓN" immediate="true" panelConfirmation="pCancelarPeticion"/>
+                                <ice:commandButton action="#{micspc.revisarPeticionSetup}" value="Revisar petición" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{login.investigador and micspc.reserva.rellenando}">
+                                <ice:commandButton action="#{micspc.firmarPeticion}" value="FIRMAR PETICIÓN" immediate="true" panelConfirmation="pcFirmarPeticion"/>
+                                <ice:commandButton action="#{micspc.editarPeticionSetup}" value="Editar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <ice:commandButton action="#{micspc.listSetup}" value="Salir" immediate="true"/>
+                </ice:panelLayout>
+                
+
+                <h1>SOLICITUD DE RESERVA</h1>
+                <br/><br/>
+                <table>
+                    <tr>
+                        <td><ice:outputText value="De "/></td>
+                        <td>
+                            <ice:outputText value="#{micspc.reserva.fechaInicio}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                        </td>
+                        <td>
+                            <ice:outputText value="#{micspc.reserva.horaInicio}" style="font-weight:bold;" rendered="#{not micspc.reserva.todoElDia}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="HH:mm" />
+                            </ice:outputText>
+                        </td>
+                        <td><ice:outputText value=" a "/></td>
+                        <td>
+                            <ice:outputText value="#{micspc.reserva.fechaFin}" style="font-weight:bold;">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:outputText>
+                        </td>
+
+                        <td>
+                            <ice:outputText value="#{micspc.reserva.horaFin}" style="font-weight:bold;" rendered="#{not micspc.reserva.todoElDia}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="HH:mm" />
+                            </ice:outputText>
+                        </td>
+                    </tr>
+                </table>
+
+                <hr/>
+                <ice:outputText value="Todo el día: "/>
+                <ice:outputText value="#{micspc.reserva.todoElDia?'Sí':'No'}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Nombre: "/>
+                <ice:outputText value="#{micspc.reserva.nombre}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Tipo de trabajo solicitado: "/>
+                <ice:outputText value="#{micspc.reserva.descripcion}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Proyecto: "/>
+                <ice:outputText value="#{micspc.reserva.proyecto.referencia}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Estado: "/>
+                <ice:outputText value="#{micspc.reserva.estado}" style="font-weight:bold;"/>
+                <hr/>
+                <ice:outputText value="Fecha solicitud: "/>
+                <ice:outputText value="#{micspc.reserva.fechasolicitud}" style="font-weight:bold;">
+                    <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                </ice:outputText>
+                <hr/>
+                <h:panelGroup rendered="#{not empty micspc.reserva.registroFirmaPeticion}">
+                    <ice:outputText value="Registro firma petición: "/>
+                    <ice:outputText value="#{micspc.reserva.registroFirmaPeticion}" style="font-weight:bold;"/>
+                    <hr/>
+                </h:panelGroup>
+                
+                <ice:outputText value="Nº solicitud de trabajo: "/>
+                <ice:outputText value="#{micspc.reserva.numordentrabajo}" style="font-weight:bold;"/>
+                <hr/>
+
+
+                <h:panelGroup rendered="#{micspc.tecnico and micspc.reserva.solicitada}">
+                        <img src="/iact-adm/css/reserva/EstadoSolicitada.png" width="500"/><br/>
+                        <ice:outputText value="A la espera de que ACEPTE o DENIEGUE la reserva" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{micspc.reserva.aceptada}">
+                        <img src="/iact-adm/css/reserva/EstadoAceptada.png" width="500"/><br/>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{micspc.reserva.denegada}">
+                        <img src="/iact-adm/css/reserva/EstadoDenegada.png" width="500"/><br/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and micspc.reserva.rellenando}">
+                        <img src="/iact-adm/css/reserva/EstadoRellenando.png" width="500"/><br/>
+                        <ice:outputText value="A la espera de que FIRME PETICION" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and micspc.reserva.solicitada}">
+                        <img src="/iact-adm/css/reserva/EstadoSolicitada.png" width="500"/><br/>
+                        <ice:outputText value="A la espera de que el responsable Acepte o Deniegue la petición" style="color:blue;"/>
+                </h:panelGroup>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

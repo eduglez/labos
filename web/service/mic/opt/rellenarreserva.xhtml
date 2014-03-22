@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:calendario="http://java.sun.com/jsf/composite/calendario">
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <h:commandButton value="Guardar y Ver" action="#{micopt.realizarPeticionReserva}" /><br/><br/>
+               
+                <h3 title="Las solicitudes se tramitarán según orden de entrada de la solicitud firmada, y conforme a la normativa del IACT.">SOLICITUD DE RESERVA</h3>
+
+                <div>
+                    <h:outputLabel for="somProyecto" value="Proyecto: "/>
+                    <br/>
+                    <ice:selectOneMenu id="somProyecto" value="#{micopt.reserva.proyecto}" required="true" partialSubmit="true" converter="#{proyectoConverter}">
+                        <f:selectItems value="#{micopt.proyectoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                    <h:outputText value="Proyecto:"/>
+                    <h:outputText id="otProyecto" value="#{micopt.reserva.proyecto.referencia} - #{micopt.reserva.proyecto.responsable.empleadoIACT.apellidos}, #{micopt.reserva.proyecto.responsable.empleadoIACT.nombre}" style="font-weight:bold;"/>
+                    <br/><br/>
+                    <h:outputText value="Usuario (email):"/>
+                    <h:outputText value="#{micopt.reserva.proyecto.responsable.empleadoIACT.contratoActual.EMail}" style="font-weight:bold;"/>
+                </div>
+                <br/><br/>
+
+
+                <div>
+                    <h:outputLabel for="itNombre" value="Nombre descriptivo para la orden: "/>
+                    <br/>
+                    <h:inputText id="itNombre" value="#{micopt.reserva.nombre}" size="40"/>
+                </div>
+
+                <br/><br/>
+                <div>
+                    <h:outputLabel for="itDescripcion" value="Tipo de trabajo solicitado, si se proporcionan muestras, indicar siglas, trabajo a realizar y observaciones: "/>
+                    <br/>
+                    <h:inputTextarea id="itDescripcion" value="#{micopt.reserva.descripcion}" cols="150" rows="4"/>
+                </div>
+
+                <table>
+                    <tr>
+                        <td>
+                            <ice:selectInputDate renderAsPopup="true" id="itFechaInicio" value="#{micopt.reserva.fechaInicio}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:selectInputDate>
+                        </td>
+                        <td>
+                            <h:inputText value="#{micopt.reserva.horaInicio}" rendered="#{not micopt.reserva.todoElDia}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="HH:mm"/>
+                            </h:inputText>
+                        </td>
+                        <td>a</td>
+                        <td>
+                            <ice:selectInputDate renderAsPopup="true" id="itFechaFin" value="#{micopt.reserva.fechaFin}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:selectInputDate>
+                        </td>
+                        <td>
+                            <h:inputText value="#{micopt.reserva.horaFin}" rendered="#{not micopt.reserva.todoElDia}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="HH:mm"/>
+                            </h:inputText>
+                        </td>
+                    </tr>
+                </table>
+                <ice:outputLabel for="sbcTodoElDia" value="Todo el día:"/>
+                <ice:selectBooleanCheckbox id="sbcTodoElDia" value="#{micopt.reserva.todoElDia}" partialSubmit="true"/>
+                <br/>
+                <br/>
+                <h3>Disponibilidad</h3>
+                <calendario:calendarioEventos calendario="#{micopt.calendario}"/>
+            </ui:define>
+
+        </ui:composition>
+</html>

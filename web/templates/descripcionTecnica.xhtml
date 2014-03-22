@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>
+            <ui:insert name="titulo">
+                Servicios Cientifico-Técnicos IACT
+            </ui:insert>
+        </title>
+        <link href="/iact-adm/xmlhttp/css/rime/rime.css" rel="stylesheet" type="text/css" />
+        <link href="/iact-adm/css/iact.css" rel="stylesheet" type="text/css" />
+    </h:head>
+
+    
+    <h:body>
+        <div id="header">
+            <h1>Servicios Cientifico-Técnicos IACT-CSIC</h1>
+        </div>
+        <h:form id="formulario">
+            <div class="subheader">
+        <h2>
+            <ui:insert name="nombreTecnica">Nombre de técnica</ui:insert>
+        </h2>
+            </div>
+        <h3>Trabajo pendiente</h3>
+        <ui:insert name="trabajopendiente">Trabajo pendiente</ui:insert>
+
+        <h3>Información de la unidad</h3>
+
+        <h4>Responsables</h4>
+        <ui:insert name="responsables">Responsables</ui:insert>
+
+        <h4>Técnicos</h4>
+        <ui:insert name="tecnicos">Técnicos</ui:insert>
+
+
+        <h4>Localización</h4>
+        <ui:insert name="localizacion">Laboratorio</ui:insert>
+        
+        <h4>Técnica y equipamiento</h4>
+        <ui:insert name="instalacion">Instalación y equipamientos</ui:insert>
+
+        <h4>Normativa</h4>
+        <ui:insert name="normativa">
+            <ui:include src="/service/normativaGeneralLaboratorios.xhtml"/>
+        </ui:insert>
+
+        <h4>Tabla de precios y tiempo</h4>
+        <ui:insert name="precios">Precios y tiempo</ui:insert>
+        </h:form>
+    </h:body>
+
+</html>

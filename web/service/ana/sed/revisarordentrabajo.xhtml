@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:commandButton value="Guardar y Ver" action="#{anased.revisarOrdenTrabajo}" /><br/><br/>
+                <h3 title="Las solicitudes se tramitarán según orden de entrada de la solicitud firmada, y conforme a la normativa del IACT.">SOLICITUD DE APOYO TÉCNICO *</h3>
+             
+
+                <ice:panelLayout layout="flow">
+                    <ice:outputText value="Proyecto:"/>
+                    <ice:outputText value="#{anased.ordenTrabajoLab.proyecto.referencia} - #{anased.ordenTrabajoLab.proyectoNoIact}" style="font-weight:bold;" rendered="#{anased.proyectoNoIACT}"/>
+                    <ice:outputText value="#{anased.ordenTrabajoLab.proyecto.referencia} - #{anased.ordenTrabajoLab.investigadorPrincipal}" style="font-weight:bold;" rendered="#{not anased.proyectoNoIACT}"/>
+                    <br/><br/>
+                    <ice:outputText value="Usuario (email):"/>
+                    <ice:outputText value="#{anased.ordenTrabajoLab.solicitante.contratoActual.EMail}" style="font-weight:bold;"/>
+                </ice:panelLayout>
+                <br/><br/>
+
+
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="itNombre" value="Nombre descriptivo para la orden: "/>
+                    <br/>
+                    <ice:inputText id="itNombre" value="#{anased.ordenTrabajoLab.nombre}" size="40" disabled="true" style="color:black;"/>
+                </ice:panelLayout>
+                <br/><br/>
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="itDescripcion" value="Tipo de trabajo solicitado, si se proporcionan muestras, indicar siglas, trabajo a realizar y observaciones: "/>
+                    <br/>
+                    <ice:inputTextarea id="itDescripcion" value="#{anased.ordenTrabajoLab.descripcion}" cols="150" rows="4" disabled="true" style="color:black;"/>
+                </ice:panelLayout>
+
+                <h4>Trabajos</h4>
+                <ice:outputText value="Total: "/>
+                <ice:outputText value="#{anased.ordenTrabajoLab.totalTrabajos}" converter="EuroCurrencyConverter" style="font-weight:bold;"/>
+                <ice:outputText value=" (#{anased.ordenTrabajoLab.numTrabajos} trabajos)" style="font-weight:bold;"/>
+                <hr/>
+                        <ice:panelLayout>
+                            <table>
+                                <tr>
+                                    <th align="left">Num</th>
+                                    <th align="left">Muestra</th>
+                                    <th align="left">Trabajo a realizar</th>
+                                    <th align="left">Precio</th>
+                                    <th align="left"></th>
+                                </tr>
+                                <ui:repeat value="#{anased.ordenTrabajoLab.trabajos}" var="trabajo">
+                                    <tr style="background-color:#{trabajo.cssColor};">
+                                        <td align="left" valign="top">
+                                            <ice:outputText value="#{trabajo.num}"/>
+                                        </td>
+
+                                        <td align="left" valign="top">
+                                            <ice:inputText value="#{trabajo.muestra}"/>
+                                        </td>
+
+
+                                        <td align="left" valign="top">
+                                            <ice:selectOneMenu value="#{trabajo.trabajo}" partialSubmit="true" immediate="true" required="true">
+                                                <f:selectItems value="#{anased.trabajosSelectOne}"/>
+                                            </ice:selectOneMenu><br/>
+                                            <ice:inputTextarea value="#{trabajo.concepto}" rendered="#{trabajo.trabajoNoRegistrado}" cols="60"/>
+                                        </td>
+
+                                        <td align="left" valign="top">
+
+                                            <ice:inputText value="#{trabajo.precio}"  converter="EuroCurrencyConverter" rendered="#{trabajo.trabajoNoRegistrado}"/>
+                                            <ice:outputText value="#{trabajo.trabajo.precioActualCsic}" converter="EuroCurrencyConverter" rendered="#{not trabajo.trabajoNoRegistrado}"/>
+                                        </td>
+                                        <td align="left" valign="top">
+                                            <ice:commandButton value="#{trabajo.marcaBorrado?'Volver a poner':'Quitar'}" action="#{anased.toggleMarcaBorrarTrabajo}" >
+                                                <f:setPropertyActionListener value="#{trabajo}" target="#{anased.trabajoSeleccionado}" />
+                                            </ice:commandButton>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                            </table>
+
+                            <ice:commandButton value="Nuevo trabajo" action="#{anased.insertarTrabajo}"/>
+                        </ice:panelLayout>
+
+
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

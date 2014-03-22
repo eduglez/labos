@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+
+
+            <ui:define name="body">
+            <h1>Servicios Científico-Técnicos</h1>
+            <ice:outputResource mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" resource="#{laboratorioFluorescencia.resumenExcel}" label="Descargar datos laboratorio" attachment="true" image="/css/ExcelDownload.png" />
+
+            <h2>Geofísica</h2>
+
+            <h2>Informática y Diseño gráfico</h2>
+
+            <h2>Análisis instrumental</h2>
+
+            <h3><ice:commandLink value="Rayos X" action="laboratorio-rayosx" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioRayosX.tecnica.responsableTecnico.apellidos}, #{laboratorioRayosX.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioRayosX.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioRayosX.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioRayosX.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+
+
+            </table>
+
+
+            <h2>Microscopía</h2>
+
+            <h2>Preparación y procesado de muestras geológicas</h2>
+
+            <h2>Parque móvil</h2>
+
+            <h2>Mantenimiento</h2>
+
+
+            <h3><ice:commandLink value="Fluorescencia de rayos X" action="laboratorio-fluorescencia" style="text-decoration:underline;"/></h3>
+
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioFluorescencia.tecnica.responsableTecnico.apellidos}, #{laboratorioFluorescencia.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioFluorescencia.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioFluorescencia.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioFluorescencia.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+                <tr>
+                    <td>Tiempo aproximado desde Solicitud a Finalización de trabajo:</td>
+                    <td><ice:outputText value="#{laboratorioFluorescencia.tecnica.tiempoMedioSolicitadoFinalizado}" style="font-weight:bold;"/></td>
+                </tr>
+                
+            </table>
+
+                <br/>
+
+                
+
+                <h2><ice:commandLink value="Informática" action="laboratorio-informatica" style="text-decoration:underline;"/></h2>
+            <table>
+
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioInformatica.tecnica.responsableTecnico.apellidos}, #{laboratorioInformatica.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioInformatica.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioInformatica.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioInformatica.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+
+            </table>
+                <h2><ice:commandLink value="Molienda" action="laboratorio-molienda" style="text-decoration:underline;"/></h2>
+            <table>
+
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioMolienda.tecnica.responsableTecnico.apellidos}, #{laboratorioMolienda.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioMolienda.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioMolienda.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioMolienda.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+
+                <tr>
+                    <td>Tiempo aproximado desde Solicitud a Finalización de trabajo:</td>
+                    <td><ice:outputText value="#{laboratorioMolienda.tecnica.tiempoMedioSolicitadoFinalizado}" style="font-weight:bold;"/></td>
+                </tr>
+
+            </table>
+
+                <h2><ice:commandLink value="Laminas delgadas" action="laboratorio-laminasdelgadas" style="text-decoration:underline;"/></h2>
+
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioLaminasDelgadas.tecnica.responsableTecnico.apellidos}, #{laboratorioLaminasDelgadas.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioLaminasDelgadas.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioLaminasDelgadas.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioLaminasDelgadas.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+                <tr>
+                    <td>Tiempo aproximado desde Solicitud a Finalización de trabajo:</td>
+                    <td><ice:outputText value="#{laboratorioLaminasDelgadas.tecnica.tiempoMedioSolicitadoFinalizado}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+
+                <h2><ice:commandLink value="Isótopos" action="laboratorio-isotopos" style="text-decoration:underline;"/></h2>
+
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioIsotopos.tecnica.responsableTecnico.apellidos}, #{laboratorioIsotopos.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioIsotopos.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioIsotopos.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioIsotopos.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+                <tr>
+                    <td>Tiempo aproximado desde Solicitud a Finalización de trabajo:</td>
+                    <td><ice:outputText value="#{laboratorioIsotopos.tecnica.tiempoMedioSolicitadoFinalizado}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+
+                <h2><ice:commandLink value="Dibujo y Diseño gráfico" action="laboratorio-dibujo" style="text-decoration:underline;"/></h2>
+
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioDibujo.tecnica.responsableTecnico.apellidos}, #{laboratorioDibujo.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioDibujo.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioDibujo.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioDibujo.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+                <tr>
+                    <td>Tiempo aproximado desde Solicitud a Finalización de trabajo:</td>
+                    <td><ice:outputText value="#{laboratorioDibujo.tecnica.tiempoMedioSolicitadoFinalizado}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+
+                <h2><ice:commandLink value="Sedigraph" action="laboratorio-serigraph" style="text-decoration:underline;"/></h2>
+
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioSerigraph.tecnica.responsableTecnico.apellidos}, #{laboratorioSerigraph.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioSerigraph.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioSerigraph.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioSerigraph.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+                <tr>
+                    <td>Tiempo aproximado desde Solicitud a Finalización de trabajo:</td>
+                    <td><ice:outputText value="#{laboratorioSerigraph.tecnica.tiempoMedioSolicitadoFinalizado}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+                <h2><ice:commandLink value="Geotech" action="laboratorio-geotech" style="text-decoration:underline;"/></h2>
+
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{laboratorioGeotech.tecnica.responsableTecnico.apellidos}, #{laboratorioGeotech.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{laboratorioGeotech.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{laboratorioGeotech.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{laboratorioGeotech.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+                <tr>
+                    <td>Tiempo aproximado desde Solicitud a Finalización de trabajo:</td>
+                    <td><ice:outputText value="#{laboratorioGeotech.tecnica.tiempoMedioSolicitadoFinalizado}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

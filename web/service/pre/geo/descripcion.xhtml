@@ -1,0 +1,130 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/templates/descripcionTecnica.xhtml">
+
+        <ui:define name="titulo">Servicios Cientifico-Técnicos IACT (#{pregeo.tecnica.nombre})</ui:define>
+
+        <ui:define name="nombreTecnica">
+            #{pregeo.tecnica.nombre}
+        </ui:define>
+
+        <ui:define name="responsables">
+            <table class="listado">
+                <tr class="listado"><th class="listado">Científico</th><th class="listado">Técnico</th></tr>
+                <tr class="listado"><td class="listado">#{pregeo.tecnica.responsableCientifico.apellidos}, #{pregeo.tecnica.responsableCientifico.nombre}</td><td class="listado">#{pregeo.tecnica.responsableTecnico.apellidos}, #{pregeo.tecnica.responsableTecnico.nombre}</td></tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="trabajopendiente">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Fecha</th>
+                    <th class="listado">Nº Orden</th>
+                    <th class="listado">Proyecto</th>
+                    <th class="listado">Estado</th>
+                </tr>
+                <ui:repeat value="#{pregeo.ordenTrabajoLaboratorioPendientesItems}" var="olPendiente">
+                    <tr class="listado">
+                        <td class="listado">
+                    <h:outputText value="#{olPendiente.fechasolicitud}">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    </td>
+                    <td class="listado">#{olPendiente.numordentrabajo}</td>
+                    <td class="listado">#{olPendiente.proyecto.referencia}</td>
+                    <td class="listado">#{olPendiente.estado}</td>
+                    </tr>
+                </ui:repeat>
+
+            </table>
+        </ui:define>
+
+        <ui:define name="tecnicos">
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><h:outputText value="#{pregeo.tecnica.responsableTecnico.apellidos}, #{pregeo.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><h:outputText value="#{pregeo.tecnica.ubicacion}"  style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><h:outputText value="#{pregeo.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><h:outputText value="#{pregeo.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+            </table>
+        </ui:define>
+
+       
+
+        <ui:define name="precios">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Código</th>
+                    <th class="listado">Tarea</th>
+                    <th class="listado">IACT</th>
+                    <th class="listado">OPI</th>
+                    <th class="listado">OTROS</th>
+                    <th class="listado">Máximo número de muestras por turno</th>
+                </tr>
+                <ui:repeat value="#{pregeo.tecnica.trabajos}" var="tarea">
+                    <tr class="listado">
+                        <td class="listado"><h:outputText value="#{tarea.codigo}"/></td>
+                    <td class="listado"><h:outputText value="#{tarea.concepto}"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualCsic}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualOpi}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualExterno}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.tiempoRelativo}"/></td>
+                    </tr>
+                </ui:repeat>
+            </table>
+        </ui:define>
+
+        <ui:define name="normativa">
+            <p>
+                Las peticiones de apoyo técnico serán realizadas por los IP
+                de los proyectos o aquel personal investigador autorizado por el primero.
+            </p>
+            <p>
+                No se podrá realizar una <strong>nueva petición</strong> de apoyo técnico para un
+                mismo proyecto hasta que la petición anterior haya sido <strong>finalizada</strong>,
+               decir que haya sido firmada su finalización por el solicitante.
+            </p>
+
+            <p>
+                Los investigadores no incluidos en ningún proyecto serán atendidos de forma
+                rotatoria, siendo considerados en su totalidad como un único grupo.
+            </p>
+
+            <p>
+                En la petición se deberá especificar el conjunto de tareas solicitadas.
+                El técnico responsable valorará el tiempo necesario para realizar las tareas
+                de la petición y no admitirá solicitudes que impliquen una carga superior de
+                trabajo. En dicho caso, el usuario deberá disminuir el número de las tareas
+                y/o muestras para ajustarse la carga de trabajo establecida. Existe una tabla
+                para cada unidad que indica el número de tareas máximo por petición, la cual
+                se utilizará para delimitar el número de tareas en una petición de forma automática.
+            </p>
+
+            <p>
+                Las eventuales peticiones de análisis con pocas tareas podrán tratarse de forma
+                prioritaria a decisión del técnico.
+            </p>
+
+            <p>
+                Las muestras, que deberán ir claramente identificadas, se entregarán como un
+                lote completo al técnico. Para no retrasar el trabajo, no se modificará el contenido
+                del lote una vez iniciado el mismo.
+            </p>
+        </ui:define>
+
+    </ui:composition>
+</html>

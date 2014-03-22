@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcFirmarPeticion" message="¿Está seguro de querer firmar la petición? Ya no podrá modificarla y será enviada al técnico correspondiente" acceptLabel="FIRMAR PETICION" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcFirmarEntrega" message="¿Está seguro de querer firmar la entrega? Esto indicará que la solicitud de apoyo técnico a finalizado" acceptLabel="FIRMAR ENTREGA" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcEntregarResultados" message="¿Ha finalizado la tarea?" acceptLabel="Sí" cancelLabel="NO"/>
+                
+                <ice:panelLayout layout="flow">
+                    <ice:panelLayout layout="flow" style="text-align:right;">
+
+                        <h:panelGroup rendered="#{cominf.tecnico and cominf.ordenTrabajoInformatica.solicitada}">
+                                <ice:commandButton action="#{cominf.comenzarEstudio}" value="COMENZAR TRABAJO" immediate="true"/>
+                                <ice:commandButton action="#{cominf.revisarOrdenTrabajoSetup}" value="Revisar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{cominf.tecnico and cominf.ordenTrabajoInformatica.enEstudio}">
+                                <ice:commandButton action="#{cominf.entregarMuestras}" value="FINALIZAR TRABAJO" immediate="true" panelConfirmation="pcEntregarResultados"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{(login.investigador or login.adminServ) and cominf.ordenTrabajoInformatica.rellenando}">
+                                <ice:commandButton action="#{cominf.firmarPeticion}" value="FIRMAR PETICION" immediate="true" panelConfirmation="pcFirmarPeticion"/>
+                                <ice:commandButton action="#{cominf.editarSetup}" value="Editar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{(login.investigador  or login.adminServ) and cominf.ordenTrabajoInformatica.resultadosEntregados}">
+                                <ice:commandButton action="#{cominf.firmarEntrega}" value="FIRMAR ENTREGA" immediate="true" panelConfirmation="pcFirmarEntrega"/>
+                        </h:panelGroup>
+
+                        <ice:commandButton action="#{cominf.listSetup}" value="Salir" immediate="true"/>
+
+                    </ice:panelLayout>
+                    
+                    <table><tr><td valign="bottom" style="font-size:large;font-weight:bold;">SOLICITUD DE APOYO TÉCNICO</td></tr></table>
+                    <br/><br/>
+                    <ice:outputText value="Estado: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.estado}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Fecha solicitud: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.fechasolicitud}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha inicio del trabajo: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.fechainicioestudio}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha entrega del trabajo: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.fechaentregaresultados}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Fecha confirmacion fin trabajo: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.fechafirmaentregadatos}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <h:panelGroup rendered="#{not empty cominf.ordenTrabajoInformatica.registroFirmaPeticion}">
+                        <ice:outputText value="Registro firma petición: "/>
+                        <ice:outputText value="#{cominf.ordenTrabajoInformatica.registroFirmaPeticion}" style="font-weight:bold;"/>
+                        <hr/>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{not empty cominf.ordenTrabajoInformatica.registroFirmaEntrega}">
+                        <ice:outputText value="Registro firma entrega: "/>
+                        <ice:outputText value="#{cominf.ordenTrabajoInformatica.registroFirmaEntrega}" style="font-weight:bold;"/>
+                        <hr/>
+                    </h:panelGroup>
+
+                    <ice:outputText value="Nº solicitud de trabajo: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.numordentrabajo}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Solicitante: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.solicitante.apellidos}, #{cominf.ordenTrabajoInformatica.solicitante.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Nombre: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Tipo de trabajo solicitado: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.descripcion}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Prioridad: "/>
+                    <ice:outputText value="#{cominf.ordenTrabajoInformatica.prioridad.prioridad} (#{cominf.ordenTrabajoInformatica.prioridad.tipo}) #{cominf.ordenTrabajoInformatica.prioridad.nombre}" style="font-weight:bold;"/>
+
+                </ice:panelLayout>
+
+                <br/><br/>
+
+                <h:panelGroup rendered="#{cominf.tecnico and cominf.ordenTrabajoInformatica.solicitada}">
+                        <img alt="Estado solicitado"  src="/iact-adm/css/estados/lab/2.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que COMIENCE EL ESTUDIO" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{cominf.tecnico and cominf.ordenTrabajoInformatica.enEstudio}">
+                    <img alt="Estado en Fase de Estudio"  src="/iact-adm/css/estados/lab/4.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que ENTREGUE LOS DATOS AL INVESTIGADOR" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{cominf.tecnico and cominf.ordenTrabajoInformatica.resultadosEntregados}">
+                    <img alt="Estado con Datos Entregados"  src="/iact-adm/css/estados/lab/5.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el investigador confirme la entrega de los datos" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{cominf.tecnico and cominf.ordenTrabajoInformatica.finalizada}">
+                    <img alt="Estado Finalizada"  src="/iact-adm/css/estados/lab/6.png" width="800"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{(login.investigador or login.adminServ) and cominf.ordenTrabajoInformatica.rellenando}">
+                    <img alt="Estado Rellenando"  src="/iact-adm/css/estados/lab/1.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que FIRME PETICION" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{(login.investigador or login.adminServ) and cominf.ordenTrabajoInformatica.solicitada}">
+                    <img alt="Estado Solicitado"  src="/iact-adm/css/estados/lab/2.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el técnico comience el estudio" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{(login.investigador or login.adminServ) and cominf.ordenTrabajoInformatica.enEstudio}">
+                    <img alt="Estado en Fase de Estudio"  src="/iact-adm/css/estados/lab/4.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el técnico entregue los datos" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{(login.investigador or login.adminServ) and cominf.ordenTrabajoInformatica.resultadosEntregados}">
+                    <img alt="Estado Datos Entregados"  src="/iact-adm/css/estados/lab/5.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que FIRME ENTREGA" style="color:red;"/>
+                </h:panelGroup>
+
+
+                <h:panelGroup rendered="#{(login.investigador or login.adminServ) and cominf.ordenTrabajoInformatica.finalizada}">
+                    <img alt="Estado Finalizada"  src="/iact-adm/css/estados/lab/6.png" width="800"/>
+                </h:panelGroup>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

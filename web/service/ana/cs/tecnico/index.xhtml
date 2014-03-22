@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <body>
+        <br/>
+        <br/>
+        <c:if test="#{anacs.tecnica.activo}">
+            <ice:outputText value="Servicio Activo" style="color:green;font-weight: bold;"/>
+            <ice:commandButton value="DESACTIVAR" action="#{anacs.desactivarServicio()}"/>
+        </c:if>
+        <c:if test="#{not anacs.tecnica.activo}">
+            <ice:outputText value="Servicio No Activo" style="color:red;font-weight: bold;"/>
+            <ice:commandButton value="ACTIVAR" action="#{anacs.activarServicio()}"/>
+        </c:if>
+        <br/>
+        <br/>
+        <ice:dataTable
+            value="#{anacs.ordenTrabajoLaboratorioItems}"
+            var="ordenTrabajo"
+            id="Tabla"
+            sortColumn="#{anacs.columnaFiltro}"
+            sortAscending="#{anacs.ascendente}">
+
+            <ice:column>
+
+                <f:facet name="header">
+
+                    <ice:commandSortHeader id="regionHeader"
+                                           columnName="fechasolicitud" >
+                        <ice:outputText value="Fecha de solicitud"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+                <ice:commandLink action="#{anacs.verOrdenTrabajoLab}">
+                    <f:setPropertyActionListener value="#{ordenTrabajo}" target="#{anacs.ordenTrabajoLab}" />
+                    <ice:outputText value="#{ordenTrabajo.fechasolicitud}" style="font-weight:bold;text-decoration: underline;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </ice:outputText>
+                </ice:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader1"
+                                           columnName="numordentrabajo" >
+                        <ice:outputText value="Num Orden"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:commandLink value="#{ordenTrabajo.numordentrabajo}" action="#{anacs.verOrdenTrabajoLab}" style="font-weight:bold;text-decoration: underline;">
+                    <f:setPropertyActionListener value="#{ordenTrabajo}" target="#{anacs.ordenTrabajoLab}" />
+                </ice:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader2"
+                                           columnName="proyecto.responsableTecnico.empleadoIACT.apellidos" >
+                        <ice:outputText value="IP"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:outputText value="#{ordenTrabajo.investigadorPrincipal}"/>
+
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader3"
+                                           columnName="proyecto.referencia" >
+                        <ice:outputText value="Proyecto"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:outputText value="#{ordenTrabajo.proyecto.referencia}"/>
+
+
+            </ice:column>
+
+
+            <ice:column>
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader4"
+                                           columnName="estado" >
+                        <ice:outputText value="Estado"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:outputText value="#{ordenTrabajo.estado}" style="color:'#{(ordenTrabajo.solicitada or ordenTrabajo.enEstudio)}';"/>
+
+            </ice:column>
+
+
+            <ice:column>
+                <f:facet name="header">
+
+                    <ice:outputText value="Num Tareas"/>
+
+                </f:facet>
+
+                <ice:outputText value="#{ordenTrabajo.numTrabajos}" style="#{(ordenTrabajo.numTrabajos lt 6) ? 'font-weight:bold;' :''}"/>
+
+            </ice:column>
+
+        </ice:dataTable>
+    </body>
+</html>

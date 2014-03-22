@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+    <ui:composition template="/templates/template.xhtml">
+
+
+            <ui:define name="body">
+            <h2><ice:outputText value="Geofísica"/></h2>
+
+            <h3><ice:commandLink value="#{geoprc.tecnica.nombre}" action="tecnica-geoprc" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{geoprc.tecnica.responsableTecnico.apellidos}, #{geoprc.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{geoprc.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{geoprc.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><ice:outputText value="#{geoprc.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{geoprc.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+            
+            <h3><ice:commandLink value="#{geosw.tecnica.nombre}" action="tecnica-geosw" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{geosw.tecnica.responsableTecnico.apellidos}, #{geosw.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{geosw.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{geosw.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><ice:outputText value="#{geosw.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{geosw.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+            </ui:define>
+
+        </ui:composition>
+    
+</html>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Application Server 9.0 Servlet 2.5//EN" "http://www.sun.com/software/appserver/dtds/sun-web-app_2_5-0.dtd">
+<sun-web-app error-url="">
+  <context-root>iact-adm</context-root>
+  <security-role-mapping>
+    <role-name>adm</role-name>
+    <principal-name>71658368m</principal-name>
+    <group-name>adm</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>investigador</role-name>
+    <principal-name>71658368m</principal-name>
+    <group-name>investigador</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>tecnico-fluorescencia</role-name>
+    <group-name>tecnico-fluorescencia</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>tecnico-geofisica</role-name>
+    <group-name>tecnico-geofisica</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>tecnico-informatica</role-name>
+    <group-name>tecnico-informatica</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>tecnico-laminasdelgadas</role-name>
+    <group-name>tecnico-laminasdelgadas</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>tecnico-molienda</role-name>
+    <group-name>tecnico-molienda</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>tecnico-rayosx</role-name>
+    <group-name>tecnico-rayosx</group-name>
+  </security-role-mapping>
+  <class-loader delegate="true"/>
+  <jsp-config>
+    <property name="keepgenerated" value="true">
+      <description>Keep a copy of the generated servlet class' java code.</description>
+    </property>
+  </jsp-config>
+</sun-web-app>

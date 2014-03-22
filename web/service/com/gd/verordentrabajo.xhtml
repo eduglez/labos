@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+
+    <body>
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:panelConfirmation id="pcFirmarPeticion" message="¿Está seguro de querer firmar la petición? Ya no podrá modificarla y será enviada al técnico correspondiente" acceptLabel="FIRMAR PETICION" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcFirmarEntrega" message="¿Está seguro de querer firmar la entrega? Esto indicará que la solicitud de apoyo técnico a finalizado" acceptLabel="FIRMAR ENTREGA" cancelLabel="Cancelar" />
+                <ice:panelConfirmation id="pcEntregarResultados" message="¿Ha subido todos los dibujos?" acceptLabel="Sí" cancelLabel="NO"/>
+
+                <ice:panelLayout layout="flow">
+                    <ice:panelLayout layout="flow" style="text-align:right;">
+                        <h:panelGroup rendered="#{comgd.tecnico and comgd.ordenTrabajoDibujo.solicitada}">
+                                <ice:commandButton action="#{comgd.comenzarEstudio}" value="COMENZAR DIBUJO" immediate="true"/>
+                                <ice:commandButton action="#{comgd.revisarOrdenTrabajoSetup}" value="Revisar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{comgd.tecnico and comgd.ordenTrabajoDibujo.enEstudio}">
+                                <ice:commandButton action="#{comgd.entregarMuestras}" value="ENVIAR BORRADOR" immediate="true" panelConfirmation="pcEntregarResultados"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{comgd.tecnico and comgd.ordenTrabajoDibujo.resultadosEntregados}">
+                                 <ice:commandButton action="#{comgd.enviarCorreccion}" value="ENVIAR CORRECCION" immediate="true" panelConfirmation="pcEntregarResultados"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{login.investigador and comgd.ordenTrabajoDibujo.rellenando}">
+                                <ice:commandButton action="#{comgd.firmarPeticion}" value="FIRMAR PETICION" immediate="true" panelConfirmation="pcFirmarPeticion"/>
+                                <ice:commandButton action="#{comgd.editarSetup}" value="Editar solicitud de trabajo" immediate="true"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{login.investigador and comgd.ordenTrabajoDibujo.resultadosEntregados}">
+                                <ice:commandButton action="#{comgd.firmarEntrega}" value="FIRMAR ENTREGA" immediate="true" panelConfirmation="pcFirmarEntrega"/>
+                        </h:panelGroup>
+
+                        <ice:commandButton action="#{comgd.listSetup}" value="Salir" immediate="true"/>
+
+                    </ice:panelLayout>
+                    
+                    <table><tr><td valign="bottom" style="font-size:large;font-weight:bold;">SOLICITUD DE APOYO TÉCNICO</td></tr></table>
+                    <br/><br/>
+                    <ice:outputText value="Estado: "/>
+                    <ice:outputText value="#{comgd.ordenTrabajoDibujo.estado}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Fecha solicitud: "/>
+                    <ice:outputText value="#{comgd.ordenTrabajoDibujo.fechasolicitud}" style="font-weight:bold;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                    </ice:outputText>
+                    <hr/>
+                    <ice:outputText value="Nº solicitud de trabajo: "/>
+                    <ice:outputText value="#{comgd.ordenTrabajoDibujo.numordentrabajo}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Proyecto: "/>
+                    <ice:outputText value="#{comgd.ordenTrabajoDibujo.proyecto.referencia} - #{comgd.ordenTrabajoDibujo.investigadorPrincipal}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Nombre: "/>
+                    <ice:outputText value="#{comgd.ordenTrabajoDibujo.nombre}" style="font-weight:bold;"/>
+                    <hr/>
+                    <ice:outputText value="Tipo de trabajo solicitado: "/>
+                    <ice:outputText value="#{comgd.ordenTrabajoDibujo.descripcion}" style="font-weight:bold;"/>
+                    <hr/>
+
+                    <br/>
+                    <h3>Ficheros Trabajo</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Nombre fichero</th>
+                            <th style="font-weight:normal; text-align:left;">Fecha</th>
+                        </tr>
+                        <ui:repeat value="#{comgd.ficheroTrabajoResources}" var="ficheroTrabajo">
+                            <tr>
+                                <td>
+                                    <ice:outputResource resource="#{ficheroTrabajo}" label="#{ficheroTrabajo.nombreFichero}" type="link" attachment="true" style="font-weight:bold;text-decoration:underline;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{ficheroTrabajo.fechaFichero}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                                    </ice:outputText>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                    <ace:fileEntry id="subidaTrabajo" absolutePath="#{comgd.directorioFicherosTrabajo}" fileEntryListener="#{comgd.uploaded}" rendered="#{login.investigador and comgd.ordenTrabajoDibujo.rellenando}" useOriginalFilename="true" useSessionSubdir="false"/>
+                    <h:commandButton value="Subir" rendered="#{login.investigador and comgd.ordenTrabajoDibujo.rellenando}"/>
+                    <br/>
+
+                    <h3>Dibujos</h3>
+                    <table cellspacing="0" border="1" cellpadding="5" bordercolor="#CCCCCC">
+                        <tr>
+                            <th style="font-weight:normal; text-align:left;">Nombre fichero</th>
+                            <th style="font-weight:normal; text-align:left;">Fecha</th>
+                        </tr>
+                        <ui:repeat value="#{comgd.dibujoResources}" var="dibujo">
+                            <tr>
+                                <td>
+                                    <ice:outputResource resource="#{dibujo}" label="#{dibujo.nombreFichero}" type="link" attachment="true" style="font-weight:bold;text-decoration:underline;"/>
+                                </td>
+                                <td>
+                                    <ice:outputText value="#{dibujo.fechaFichero}" style="font-weight:bold;">
+                                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy HH:mm" />
+                                    </ice:outputText>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                    <ace:fileEntry id="subidaDibujo" absolutePath="#{comgd.directorioDibujos}" fileEntryListener="#{comgd.uploaded}" rendered="#{comgd.tecnico and (comgd.ordenTrabajoDibujo.enEstudio or comgd.ordenTrabajoDibujo.resultadosEntregados)}" useOriginalFilename="true" useSessionSubdir="false"/>
+                    <h:commandButton value="Subir" rendered="#{comgd.tecnico and (comgd.ordenTrabajoDibujo.enEstudio or comgd.ordenTrabajoDibujo.resultadosEntregados)}"/>
+                    <br/>
+                  
+                </ice:panelLayout>
+
+                <br/><br/>
+
+                <h:panelGroup rendered="#{comgd.tecnico and comgd.ordenTrabajoDibujo.solicitada}">
+
+                        <img src="/iact-adm/css/dibujo/EstadoSolicitada.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que COMIENCE EL ESTUDIO" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{comgd.tecnico and comgd.ordenTrabajoDibujo.enEstudio}">
+                        <img src="/iact-adm/css/dibujo/EstadoDibujando.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que ENTREGUE LOS DATOS AL INVESTIGADOR" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{comgd.tecnico and comgd.ordenTrabajoDibujo.resultadosEntregados}">
+                        <img src="/iact-adm/css/dibujo/EstadoPendiente.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el investigador confirme la entrega de los datos" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{comgd.tecnico and comgd.ordenTrabajoDibujo.finalizada}">
+                        <img src="/iact-adm/css/dibujo/EstadoFinalizada.png" width="800"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and comgd.ordenTrabajoDibujo.rellenando}">
+                        <img src="/iact-adm/css/dibujo/EstadoRellenando.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que FIRME PETICION" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and comgd.ordenTrabajoDibujo.solicitada}">
+                        <img src="/iact-adm/css/dibujo/EstadoSolicitada.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el técnico comience el estudio" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and comgd.ordenTrabajoDibujo.enEstudio}">
+                        <img src="/iact-adm/css/dibujo/EstadoDibujando.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que el técnico entregue los datos" style="color:blue;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and comgd.ordenTrabajoDibujo.resultadosEntregados}">
+                        <img src="/iact-adm/css/dibujo/EstadoPendiente.png" width="800"/><br/>
+                        <ice:outputText value="A la espera de que FIRME ENTREGA" style="color:red;"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{login.investigador and comgd.ordenTrabajoDibujo.finalizada}">
+                        <img src="/iact-adm/css/dibujo/EstadoFinalizada.png" width="800"/>
+                </h:panelGroup>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

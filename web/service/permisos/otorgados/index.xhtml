@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/templates/template.xhtml">
+
+
+        <ui:define name="body">
+            <h3>Mis Autorizaciones Otorgadas</h3>
+
+
+            <ice:dataTable
+                value="#{permisos.permisosOtorgados}"
+                var="permiso"
+                id="Tabla" >
+                <ice:column>
+
+                    <f:facet name="header" >
+
+                            <ice:outputText value="Proyecto" style="text-decoration: underline;"/>
+
+                    </f:facet>
+                    <ice:outputText value="#{permiso.proyecto.referencia}"/>
+                </ice:column>
+
+                <ice:column>
+                    <f:facet name="header" >
+                            <ice:outputText value="Beneficiario" style="text-decoration: underline;"/>
+                    </f:facet>
+                    <ice:outputText value="#{permiso.permitido.apellidos}, #{permiso.permitido.nombre}"/>
+                </ice:column>
+
+                <ice:column>
+                    <f:facet name="header">
+                            <ice:outputText value="Autorización"/>
+                    </f:facet>
+
+                    <ice:outputText value="#{permiso.permiso}"/>
+                </ice:column>
+
+                <ice:column>
+                    <f:facet name="header">
+
+                            <ice:outputText value="Borrar"/>
+
+                    </f:facet>
+
+                    <ice:commandLink  action="#{permisos.borrarPermiso}" value="Borrar" immediate="true">
+                        <f:setPropertyActionListener target="#{permisos.permisoSeleccionado}" value="#{permiso}"/>
+                    </ice:commandLink>
+                </ice:column>
+
+            </ice:dataTable>
+            <br/>
+            
+            <ice:panelGrid columns="4">
+                <ice:outputText value="Empleado"/>
+                <ice:outputText value="Proyecto"/>
+                <ice:outputText value="Permiso"/>
+                &nbsp;
+                
+                <ice:selectOneMenu id="somEmpleado" value="#{permisos.empleadoSeleccionado}" required="true" converter="#{empleadoConverter}">
+                    <f:selectItems value="#{permisos.empleadosInvestigacionSelectOne}"/>
+                </ice:selectOneMenu>
+                <ice:selectOneMenu id="somProyecto" value="#{permisos.proyectoSeleccionado}" required="true" converter="#{proyectoConverter}">
+                    <f:selectItems value="#{permisos.proyectoItemsAvailableSelectOne}"/>
+                </ice:selectOneMenu>
+                <ice:selectOneMenu id="somPermiso" value="#{permisos.tipoPermisoSeleccionado}" required="true">
+                    <f:selectItems value="#{permisos.permisosSelectOne}"/>
+                </ice:selectOneMenu>
+                
+                <ice:commandButton  action="#{permisos.insertarPermiso}" value="+"/>
+            </ice:panelGrid>
+            
+        </ui:define>
+
+    </ui:composition>
+
+</html>

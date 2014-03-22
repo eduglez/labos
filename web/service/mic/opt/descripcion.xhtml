@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cal="http://java.sun.com/jsf/composite/calendario">
+
+    <ui:composition template="/templates/descripcionTecnica.xhtml">
+
+        <ui:define name="titulo">Servicios Cientifico-Técnicos IACT (#{ micopt.tecnica.nombre})</ui:define>
+
+        <ui:define name="nombreTecnica">
+            #{ micopt.tecnica.nombre}
+        </ui:define>
+
+        <ui:define name="responsables">
+            <table class="listado">
+                <tr class="listado"><th class="listado">Científico</th><th class="listado">Técnico</th></tr>
+                <tr class="listado"><td class="listado">#{ micopt.tecnica.responsableCientifico.apellidos}, #{ micopt.tecnica.responsableCientifico.nombre}</td><td class="listado">#{ micopt.tecnica.responsableTecnico.apellidos}, #{ micopt.tecnica.responsableTecnico.nombre}</td></tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="trabajopendiente">
+            <cal:calendarioEventos calendario="#{micopt.calendario}"/>
+        </ui:define>
+
+        <ui:define name="tecnicos">
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><h:outputText value="#{ micopt.tecnica.responsableTecnico.apellidos}, #{ micopt.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><h:outputText value="#{ micopt.tecnica.ubicacion}"  style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><h:outputText value="#{ micopt.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><h:outputText value="#{ micopt.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+            </table>
+        </ui:define>
+
+    </ui:composition>
+</html>

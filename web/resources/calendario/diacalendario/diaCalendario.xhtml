@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface displayName="Día en un calendario">
+        <cc:attribute name="diaCalendario" required="true" type="jsf.util.DiaCalendario"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <td class="#{cc.attrs.diaCalendario.mesActual?'eventoNormal':'eventoGris'}" valign="top" height="60px" width="100px">
+            <h:outputText value="#{cc.attrs.diaCalendario.fecha}" style="#{cc.attrs.diaCalendario.hoy?'font-weight:bold;':'font-weight:normal;'}">
+                <f:convertDateTime timeZone="Europe/Paris" pattern="dd" />
+            </h:outputText>
+
+            <ui:repeat value="#{cc.attrs.diaCalendario.reservas}" var="reserva">
+                <br/>
+                <h:commandLink value="#{reserva.recurso.nombre}" title="#{reserva.toString}" action="ver-reserva" style="font-size: smaller">
+                    <f:setPropertyActionListener value="#{reserva}" target="#{micspc.reserva}"/>
+                </h:commandLink>
+            </ui:repeat>
+
+        </td>
+    </cc:implementation>
+</html>

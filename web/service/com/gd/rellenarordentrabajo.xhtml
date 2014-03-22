@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <ice:commandButton value="Guardar y Ver" action="#{comgd.rellenarOrdenTrabajo}" /><br/><br/>
+               
+                <h3 title="Las solicitudes se tramitarán según orden de entrada de la solicitud firmada, y conforme a la normativa del IACT.">SOLICITUD DE APOYO TÉCNICO *</h3>
+
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="somProyecto" value="Proyecto: "/>
+                    <br/>
+                    <ice:selectOneMenu id="somProyecto" value="#{comgd.ordenTrabajoDibujo.proyecto}" partialSubmit="true" immediate="true" required="true">
+                        <f:selectItems value="#{comgd.proyectoItemsAvailableSelectOne}"/>
+                    </ice:selectOneMenu>
+                    <br/><br/>
+                    <ice:outputText value="Proyecto:"/>
+                    <ice:outputText value="#{comgd.ordenTrabajoDibujo.proyecto.referencia} - #{comgd.ordenTrabajoDibujo.investigadorPrincipal}" style="font-weight:bold;"/>
+                    <br/><br/>
+                    <ice:outputText value="Usuario (email):"/>
+                    <ice:outputText value="#{comgd.ordenTrabajoDibujo.correoInvestigadorPrincipal}" style="font-weight:bold;"/>
+                </ice:panelLayout>
+                <br/><br/>
+
+
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="itNombre" value="Nombre descriptivo para la orden: "/>
+                    <br/>
+                    <ice:inputText id="itNombre" value="#{comgd.ordenTrabajoDibujo.nombre}" size="40"/>
+                </ice:panelLayout>
+                <br/><br/>
+                <ice:panelLayout layout="flow">
+                    <ice:outputLabel for="itDescripcion" value="Tipo de trabajo solicitado, si se proporcionan muestras, indicar siglas, trabajo a realizar y observaciones: "/>
+                    <br/>
+                    <ice:inputTextarea id="itDescripcion" value="#{comgd.ordenTrabajoDibujo.descripcion}" cols="150" rows="4"/>
+                </ice:panelLayout>
+
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

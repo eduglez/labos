@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="body">
+                <div id="header">
+                    <h1>Servicios Cientifico-Técnicos IACT-CSIC</h1>
+                </div>
+        
+                <div class="subheader">
+                <h2>#{prelam.tecnica.nombre}</h2>
+                </div>
+                <h:commandLink action="ver-descripcion" value="Ver información de la unidad"/>
+                <ui:include src="#{prelam.tecnico ? 'tecnico/index.xhtml' : (login.autorizadoServiciosCT ? 'investigador/index.xhtml' : '../../../error-login.xhtml')}"/>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

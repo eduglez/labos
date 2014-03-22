@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/templates/descripcionTecnica.xhtml">
+
+        <ui:define name="titulo">Servicios Cientifico-Técnicos IACT (#{anaxrd.tecnica.nombre})</ui:define>
+
+        <ui:define name="nombreTecnica">
+            #{anaxrd.tecnica.nombre}
+        </ui:define>
+
+        <ui:define name="responsables">
+            <table class="listado">
+                <tr class="listado"><th class="listado">Científico</th><th class="listado">Técnico</th></tr>
+                <tr class="listado"><td class="listado">#{anaxrd.tecnica.responsableCientifico.apellidos}, #{anaxrd.tecnica.responsableCientifico.nombre}</td><td class="listado">#{anaxrd.tecnica.responsableTecnico.apellidos}, #{anaxrd.tecnica.responsableTecnico.nombre}</td></tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="trabajopendiente">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Fecha</th>
+                    <th class="listado">Nº Orden</th>
+                    <th class="listado">Proyecto</th>
+                    <th class="listado">Estado</th>
+                </tr>
+                <ui:repeat value="#{anaxrd.ordenTrabajoLaboratorioPendientesItems}" var="olPendiente">
+                    <tr class="listado">
+                        <td class="listado">
+                    <h:outputText value="#{olPendiente.fechasolicitud}">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    </td>
+                    <td class="listado">#{olPendiente.numordentrabajo}</td>
+                    <td class="listado">#{olPendiente.proyecto.referencia}</td>
+                    <td class="listado">#{olPendiente.estado}</td>
+                    </tr>
+                </ui:repeat>
+
+            </table>
+        </ui:define>
+
+        <ui:define name="tecnicos">
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><h:outputText value="#{anaxrd.tecnica.responsableTecnico.apellidos}, #{anaxrd.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><h:outputText value="#{anaxrd.tecnica.ubicacion}"  style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><h:outputText value="#{anaxrd.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><h:outputText value="#{anaxrd.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="instalacion">
+            <p>
+                Una vez se recibe la muestra en polvo se cargo en el porta correspondiente,
+                pasando a continuación a efectuar la medida.
+            </p>
+            <p>
+                En determinados casos es necesario realizar el estudio de las fracciones de
+                muestra con tamaño inferior a dos micras, aplicando distintos tratamientos,
+                fundamentalmente:
+            </p>
+            <p>
+            <ol>
+                <li>Agregado orientado (A.O.)  sin tratamiento con un barrido  de 3 a 50 (º)</li>
+                <li>A.O. en entilén glicol (previo calentamiento en estufa durante 24 horas a 60ºC</li>
+                <li>A .O .en dimetil sulfosido (72 horas a 80ºC)</li>
+                <li>A .O. calentado  a 550ºC durante 90 minutos.</li>
+            </ol>
+            </p>
+
+            <p>En estos tres últimos casos se hace un barrido de 3 a 30 (º)</p>
+
+            <p>
+                Las muestras  se analizan utilizando un instrumento comercial de Difracción
+                de Rayos X (X´PERT PRO  de  PANALYTICAL), equipado con un tubo de rayos X de
+                ánodo de Cu (45kV, 40 mA); se utiliza  el portamuestras giratorio para mejorar
+                la estadística de la orientación, con un tiempo de rotación de las muestras de
+                4 seg ,un filtro de Ni y  un detector  del tipo RTMS (X´Celerator) de tipo lineal.
+                El rango de barrido normal es de 4.000 a 69,9928 (º), el tamaño de paso (Step size)
+                es de 0,0084 (º), el tipo de barrido es con un tiempo de contaje de 10,150 segundos,
+                obteniéndose 7898 puntos de información en total y tardando aproximadamente 11
+                minutos por muestra. La interpretación se realiza utilizando el propio software
+                del equipo (X´Pert High Score).
+            </p>
+        </ui:define>
+
+        <ui:define name="precios">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Código</th>
+                    <th class="listado">Tarea</th>
+                    <th class="listado">IACT</th>
+                    <th class="listado">OPI</th>
+                    <th class="listado">OTROS</th>
+                    <th class="listado">Máximo número de muestras por turno</th>
+                </tr>
+                <ui:repeat value="#{anaxrd.tecnica.trabajos}" var="tarea">
+                    <tr class="listado">
+                        <td class="listado"><h:outputText value="#{tarea.codigo}"/></td>
+                    <td class="listado"><h:outputText value="#{tarea.concepto}"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualCsic}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualOpi}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualExterno}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.tiempoRelativo}"/></td>
+                    </tr>
+                </ui:repeat>
+            </table>
+            <p><strong>Los precios no incluyen la interpretación del diagrama</strong></p>
+        </ui:define>
+
+
+
+    </ui:composition>
+</html>

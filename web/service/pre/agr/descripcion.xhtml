@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/templates/descripcionTecnica.xhtml">
+
+        <ui:define name="titulo">Servicios Cientifico-Técnicos IACT (#{preagr.tecnica.nombre})</ui:define>
+
+        <ui:define name="nombreTecnica">
+            #{preagr.tecnica.nombre}
+        </ui:define>
+
+        <ui:define name="responsables">
+            <table class="listado">
+                <tr class="listado"><th class="listado">Científico</th><th class="listado">Técnico</th></tr>
+                <tr class="listado"><td class="listado">#{preagr.tecnica.responsableCientifico.apellidos}, #{preagr.tecnica.responsableCientifico.nombre}</td><td class="listado">#{preagr.tecnica.responsableTecnico.apellidos}, #{preagr.tecnica.responsableTecnico.nombre}</td></tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="trabajopendiente">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Fecha</th>
+                    <th class="listado">Nº Orden</th>
+                    <th class="listado">Proyecto</th>
+                    <th class="listado">Estado</th>
+                </tr>
+                <ui:repeat value="#{preagr.ordenTrabajoLaboratorioPendientesItems}" var="olPendiente">
+                    <tr class="listado">
+                        <td class="listado">
+                    <h:outputText value="#{olPendiente.fechasolicitud}">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    </td>
+                    <td class="listado">#{olPendiente.numordentrabajo}</td>
+                    <td class="listado">#{olPendiente.proyecto.referencia}</td>
+                    <td class="listado">#{olPendiente.estado}</td>
+                    </tr>
+                </ui:repeat>
+
+            </table>
+        </ui:define>
+
+        <ui:define name="tecnicos">
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><h:outputText value="#{preagr.tecnica.responsableTecnico.apellidos}, #{preagr.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><h:outputText value="#{preagr.tecnica.ubicacion}"  style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><h:outputText value="#{preagr.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><h:outputText value="#{preagr.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+            </table>
+        </ui:define>
+
+       
+
+        <ui:define name="precios">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Código</th>
+                    <th class="listado">Tarea</th>
+                    <th class="listado">IACT</th>
+                    <th class="listado">OPI</th>
+                    <th class="listado">OTROS</th>
+                    <th class="listado">Máximo número de muestras por turno</th>
+                </tr>
+                <ui:repeat value="#{preagr.tecnica.trabajos}" var="tarea">
+                    <tr class="listado">
+                        <td class="listado"><h:outputText value="#{tarea.codigo}"/></td>
+                    <td class="listado"><h:outputText value="#{tarea.concepto}"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualCsic}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualOpi}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualExterno}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.tiempoRelativo}"/></td>
+                    </tr>
+                </ui:repeat>
+            </table>
+        </ui:define>
+
+
+
+    </ui:composition>
+</html>

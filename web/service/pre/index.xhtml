@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+    <ui:composition template="/templates/template.xhtml">
+
+
+            <ui:define name="body">
+            <h2><ice:outputText value="Preparación y procesado de muestras geológicas"/></h2>
+            <h3><ice:commandLink value="#{prelam.tecnica.nombre}" action="tecnica-prelam" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{prelam.tecnica.responsableTecnico.apellidos}, #{prelam.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{prelam.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{prelam.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><ice:outputText value="#{prelam.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{prelam.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+
+            <h3><ice:commandLink value="#{premol.tecnica.nombre}" action="tecnica-premol" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{premol.tecnica.responsableTecnico.apellidos}, #{premol.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{premol.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{premol.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><ice:outputText value="#{premol.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{premol.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+
+            
+             <h3><ice:commandLink value="#{preagr.tecnica.nombre}" action="tecnica-preagr" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{preagr.tecnica.responsableTecnico.apellidos}, #{preagr.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{preagr.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{preagr.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><ice:outputText value="#{preagr.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{preagr.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+            
+            
+            <h3><ice:commandLink value="#{pregeo.tecnica.nombre}" action="tecnica-pregeo" style="text-decoration:underline;"/></h3>
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><ice:outputText value="#{pregeo.tecnica.responsableTecnico.apellidos}, #{pregeo.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><ice:outputText value="#{pregeo.tecnica.ubicacion}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><ice:outputText value="#{pregeo.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><ice:outputText value="#{pregeo.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Número de trabajos pendientes:</td>
+                    <td><ice:outputText value="#{pregeo.tecnica.numOrdenesTrabajoPendiente}" style="font-weight:bold;"/></td>
+                </tr>
+            </table>
+            
+            
+            
+            </ui:define>
+
+        </ui:composition>
+    
+</html>
+

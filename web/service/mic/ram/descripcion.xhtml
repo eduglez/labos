@@ -1,0 +1,147 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cal="http://java.sun.com/jsf/composite/calendario">
+
+    <ui:composition template="/templates/descripcionTecnica.xhtml">
+
+        <ui:define name="titulo">Servicios Cientifico-Técnicos IACT (#{ micspc.tecnica.nombre})</ui:define>
+
+        <ui:define name="nombreTecnica">
+            #{ micspc.tecnica.nombre}
+        </ui:define>
+
+        <ui:define name="responsables">
+            <table class="listado">
+                <tr class="listado"><th class="listado">Científico</th><th class="listado">Técnico</th></tr>
+                <tr class="listado"><td class="listado">#{ micspc.tecnica.responsableCientifico.apellidos}, #{ micspc.tecnica.responsableCientifico.nombre}</td><td class="listado">#{ micspc.tecnica.responsableTecnico.apellidos}, #{ micspc.tecnica.responsableTecnico.nombre}</td></tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="trabajopendiente">
+            <cal:calendarioEventos calendario="#{micspc.calendario}"/>
+        </ui:define>
+
+        <ui:define name="tecnicos">
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><h:outputText value="#{ micspc.tecnica.responsableTecnico.apellidos}, #{ micspc.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><h:outputText value="#{ micspc.tecnica.ubicacion}"  style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><h:outputText value="#{ micspc.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><h:outputText value="#{ micspc.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="instalacion">
+            <p>
+                La unidad está dotada con un equipo compacto de espectroscopia
+                micro-Raman  <strong>LabRAM-HR-VIS de Horiba-Ybon</strong> que
+                incluye los siguientes elementos:
+            </p>
+            <ul>
+                <li><strong>Espectrómetro</strong> simple de red de difracción,
+                    de gran distancia focal, dotado de:
+                </li>
+                <ul>
+                    <li>
+                         Espectrómetro de campo plano de 800 mm de distancia focal
+                         con dos redes de difracción (1800 y 600 líneas/mm) conmutables
+                         de forma automatizada. El barrido espectral mediante barra
+                         sinus de alta precisión, y la apertura de la rendija de
+                         entrada están controladas mediante software.
+                    </li>
+
+                    <li>
+                        <strong>Láser de diodo @ 785</strong> nm. Potencia: 150 
+                        mW 1.0. Modelo Lynx TEC 120-785-150.  Láser DPSS modelo
+                        CDPS532M -20mW @ 532 nm. Diámetro del haz: 0,6 mm, Divergencia &lt; 1,2 mrad
+                    </li>
+
+                    <li>
+                       Un detector CCD multicanal (1.024x256 pixels de 26,6x6,7 mm)
+                       refrigerado por nitrógeno líquido, con ruido de fondo inferior
+                       a 6 e/pixel, y una corriente oscura inferior a 1 e/pixel/h para
+                       cubrir el rango espectral de 400 a 1.100 nm.
+                    </li>
+
+                    <li>
+                       Un diodo láser  para el control del alineamiento óptico;
+                       un conjunto de filtros para medidas de baja frecuencia
+                       (&gt;100 cm<sup>-1</sup>) compuesto por un filtro notch diélectrico @ 532 nm
+                       y de @ 785 nm para eliminar la dispersión Raleigh y un filtro
+                       interferencial para eliminar las líneas de plasma del láser de
+                       estado sólido (@ 532 nm) y del láser de Ar  (@ 785 nm).
+                       Una rueda de 6 filtros de densidad neutra (ND 0.3, 0.6, 1, 2, 3, 4)
+                       controlada por software para cambiar la potencia de excitación
+                       a la que se verá expuesta la muestra.
+                    </li>
+                </ul>
+
+                <li>
+                    <strong>Microscopio confocal</strong>, dotado de:
+                </li>
+
+                <ul>
+                    <li>
+                        Un microscopio confocal con sistema de iluminación por transmisión
+                        con: condensador Abbe, revólver porta-objetivos con 3 objetivos
+                        acromáticos (10x, 50x y 100x);  iris ajustable de forma continua
+                        por software desde varias micras hasta 1,2 mm para poder definir
+                        con precisión el tamaño del volumen analizado y mantener perfecta
+                        confocalidad; iluminación y visualización de la muestra con luz
+                        polarizada; Incluye un objetivo 50x para larga distancia de trabajo
+                        (10,6 mm) NA=0,50.
+                    </li>
+
+                    <li>
+                        Una <strong>pletina de deslizamiento motorizado XYZ</strong>. Pletina XY motorizada
+                        75mm x 50mm. Paso 0,1&#0956;m. Eje Z motorizado. Paso 0,5 &#0956;m.
+                    </li>
+                    <li>
+                        Una <strong>celda de enfriamiento</strong> y calentamiento de la muestra <strong>LINKAM</strong> modelo THMS600 con
+                        controlador térmico modelo TMS94. Rango de temperatura: -196 a 600º C. Tamaño máximo de muestra: 12 mm
+                    </li>
+
+                    <li>
+                        Una videocámara color para visualización de la muestra y del haz
+                        láser incidente con tarjeta de visualización para ordenador
+                    </li>
+                </ul>
+                <li>
+                    <strong>Software para la adquisición y procesamiento.</strong>
+                </li>
+            </ul>
+            <h4>Enlaces externos:</h4>
+            <ul>
+
+                <li><a href="http://www.horiba.com/scientific/products/raman-spectroscopy/tutorial-faqs/raman-faqs/">Raman FAQs - HORIBA</a></li>
+                <li><a href="http://www.horiba.com/scientific/products/raman-spectroscopy/tutorial-faqs/raman-tutorial/">Raman Tutorial - HORIBA</a></li>
+                <li><a href="http://www.horiba.com/scientific/products/raman-spectroscopy/applications/application-notes-articles/">Raman Aplicaciones General</a></li>
+                <li><a href="http://www.horiba.com/fileadmin/uploads/Scientific/Documents/Raman/Geo01.pdf">Raman Aplicaciones Geología</a></li>
+            </ul>
+
+            <h4>Ficheros:</h4>
+                <ul>
+
+                <li><a href="info/Raman_IACT_Confocalidad_HORIBA.pdf">Raman IACT Confocalidad HORIBA</a></li>
+                <li><a href="info/Raman_IACT_Resolucion Espectral_HORIBA.pdf">Raman IACT Resolucion Espectral HORIBA</a></li>
+                <li><a href="info/Raman_info_Bandas_Espectrales.pdf">Raman info Bandas Espectrales</a></li>
+            </ul>
+            
+        </ui:define>
+
+
+
+    </ui:composition>
+</html>

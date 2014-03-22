@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:calendario="http://java.sun.com/jsf/composite/calendario">
+
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="body">
+                <h:commandButton value="Guardar y Ver" action="#{micspc.revisarPeticion}" /><br/><br/>
+               
+                <h3 title="Las solicitudes se tramitarán según orden de entrada de la solicitud firmada, y conforme a la normativa del IACT.">SOLICITUD DE RESERVA</h3>
+
+                <div>
+                    <h:outputText value="Proyecto:"/>
+                    <h:outputText id="otProyecto" value="#{micspc.reserva.proyecto.referencia} - #{micspc.reserva.proyecto.responsable.empleadoIACT.apellidos}, #{micspc.reserva.proyecto.responsable.empleadoIACT.nombre}" style="font-weight:bold;"/>
+                    <br/><br/>
+                    <h:outputText value="Usuario (email):"/>
+                    <h:outputText value="#{micspc.reserva.proyecto.responsable.empleadoIACT.contratoActual.EMail}" style="font-weight:bold;"/>
+                </div>
+                <br/><br/>
+
+
+                <div>
+                    <h:outputLabel for="itNombre" value="Nombre descriptivo para la orden: "/>
+                    <br/>
+                    <h:inputText id="itNombre" value="#{micspc.reserva.nombre}" size="40" disabled="true"/>
+                </div>
+
+                <br/><br/>
+                <div>
+                    <h:outputLabel for="itDescripcion" value="Tipo de trabajo solicitado, si se proporcionan muestras, indicar siglas, trabajo a realizar y observaciones: "/>
+                    <br/>
+                    <h:inputTextarea id="itDescripcion" value="#{micspc.reserva.descripcion}" cols="150" rows="4" disabled="true"/>
+                </div>
+
+                <table>
+                    <tr>
+                        <td>
+                            <ice:selectInputDate renderAsPopup="true" id="itFechaInicio" value="#{micspc.reserva.fechaInicio}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:selectInputDate>
+                        </td>
+                        <td>
+                            <h:inputText value="#{micspc.reserva.horaInicio}" rendered="#{not micspc.reserva.todoElDia}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="HH:mm"/>
+                            </h:inputText>
+                        </td>
+                        <td>a</td>
+                        <td>
+                            <ice:selectInputDate renderAsPopup="true" id="itFechaFin" value="#{micspc.reserva.fechaFin}" renderMonthAsDropdown="true" renderYearAsDropdown="true">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                            </ice:selectInputDate>
+                        </td>
+                        <td>
+                            <h:inputText value="#{micspc.reserva.horaFin}" rendered="#{not micspc.reserva.todoElDia}">
+                                <f:convertDateTime timeZone="Europe/Paris" pattern="HH:mm"/>
+                            </h:inputText>
+                        </td>
+                    </tr>
+                </table>
+                <ice:outputLabel for="sbcTodoElDia" value="Todo el día:"/>
+                <ice:selectBooleanCheckbox id="sbcTodoElDia" value="#{micspc.reserva.todoElDia}" partialSubmit="true"/>
+                <br/>
+                <br/>
+                <h3>Disponibilidad</h3>
+                <calendario:calendarioEventos calendario="#{micspc.calendario}"/>
+            </ui:define>
+
+        </ui:composition>
+</html>

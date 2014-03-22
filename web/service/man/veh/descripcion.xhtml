@@ -1,0 +1,115 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/templates/descripcionTecnica.xhtml">
+
+        <ui:define name="titulo">Servicios Cientifico-Técnicos IACT (#{comgd.tecnica.nombre})</ui:define>
+
+        <ui:define name="nombreTecnica">
+            #{comgd.tecnica.nombre}
+        </ui:define>
+
+        <ui:define name="responsables">
+            <table class="listado">
+                <tr class="listado"><th class="listado">Científico</th><th class="listado">Técnico</th></tr>
+                <tr class="listado"><td class="listado">#{comgd.tecnica.responsableCientifico.apellidos}, #{comgd.tecnica.responsableCientifico.nombre}</td><td class="listado">#{comgd.tecnica.responsableTecnico.apellidos}, #{comgd.tecnica.responsableTecnico.nombre}</td></tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="trabajopendiente">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Fecha</th>
+                    <th class="listado">Nº Orden</th>
+                    <th class="listado">Proyecto</th>
+                    <th class="listado">Estado</th>
+                </tr>
+                <ui:repeat value="#{comgd.ordenTrabajoLaboratorioDibujoPendientesItems}" var="olPendiente">
+                    <tr class="listado">
+                        <td class="listado">
+                    <h:outputText value="#{olPendiente.fechasolicitud}">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    </td>
+                    <td class="listado">#{olPendiente.numordentrabajo}</td>
+                    <td class="listado">#{olPendiente.proyecto.referencia}</td>
+                    <td class="listado">#{olPendiente.estado}</td>
+                    </tr>
+                </ui:repeat>
+
+            </table>
+        </ui:define>
+
+        <ui:define name="tecnicos">
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><h:outputText value="#{comgd.tecnica.responsableTecnico.apellidos}, #{comgd.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><h:outputText value="#{comgd.tecnica.ubicacion}"  style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><h:outputText value="#{comgd.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><h:outputText value="#{comgd.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="normativa">
+            <p>
+                Las peticiones de apoyo técnico serán realizadas por los IP de los
+                proyectos o aquel personal investigador autorizado por el primero.
+            </p>
+            <p>
+                No se podrá realizar una nueva petición de apoyo técnico para un
+                mismo proyecto hasta que la petición anterior haya sido finalizada,
+                es decir que haya sido firmada su finalización por el solicitante.
+            </p>
+
+            <p>
+                Los investigadores no incluidos en ningún proyecto serán atendidos
+                de forma rotatoria, siendo considerados en su totalidad como un único grupo.
+            </p>
+
+            <p>
+                Se establecerá un turno de entrada de trabajos secuencial y por proyecto.
+                Cada conjunto de trabajos no podrá ocupar una duración superior a 1 semana.
+                En casos excepcionales, y siempre que el trabajo no suponga una alteración
+                del flujo normal de la labor en curso, se tendrá en cuenta el carácter de
+                “urgencia” de los trabajos debido a circunstancias debidamente justificadas.
+            </p>
+
+            <p>
+                Es de buena práctica el agradecer en los reconocimientos de las publicaciones
+                el apoyo obtenido por parte del personal de servicios, sin el cual sería más
+                difícil poder hacer públicos dichos trabajos.
+            </p>
+
+        </ui:define>
+
+        <ui:define name="instalacion">
+            <p>
+                La digitalización de imágenes escaneadas se hará mediante el software <strong>Corel Draw 8.0</strong>
+            </p>
+        </ui:define>
+
+        <ui:define name="precios">
+            <p>
+                El coste implicado en estos trabajos es mínimo.
+                La actualización de los equipos informáticos necesarios se
+                llevará a cabo con cargo a la infraestructura del IACT.
+            </p>
+        </ui:define>
+
+
+
+    </ui:composition>
+</html>

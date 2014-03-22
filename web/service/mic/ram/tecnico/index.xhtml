@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+        <ice:dataTable
+            value="#{micspc.reservas}"
+            var="reserva"
+            id="TablaReservas">
+
+            <ice:column>
+
+                <f:facet name="header">
+                        <ice:outputText value="Fecha Inicio"/>
+                </f:facet>
+                <h:commandLink action="ver-reserva">
+                    <f:setPropertyActionListener value="#{reserva}" target="#{micspc.reserva}" />
+                    <ice:outputText value="#{reserva.fechaInicio}" style="font-weight:bold;text-decoration: underline;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </ice:outputText>
+                </h:commandLink>
+            </ice:column>
+
+
+            <ice:column>
+
+                <f:facet name="header">
+                        <ice:outputText value="Fecha Fin"/>
+                </f:facet>
+                <h:commandLink action="ver-reserva">
+                    <f:setPropertyActionListener value="#{reserva}" target="#{micspc.reserva}" />
+                    <ice:outputText value="#{reserva.fechaFin}" style="font-weight:bold;text-decoration: underline;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </ice:outputText>
+                </h:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                        <ice:outputText value="Microscopio"/>
+                </f:facet>
+                <h:commandLink action="ver-reserva">
+                    <f:setPropertyActionListener value="#{reserva}" target="#{micspc.reserva}" />
+                    <ice:outputText value="#{reserva.recurso.nombre}" style="font-weight:bold;text-decoration: underline;"/>
+                </h:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                        <ice:outputText value="Proyecto"/>
+                </f:facet>
+                <h:commandLink action="ver-reserva">
+                    <f:setPropertyActionListener value="#{reserva}" target="#{micspc.reserva}" />
+                    <ice:outputText value="#{reserva.proyecto.referencia}" style="font-weight:bold;text-decoration: underline;"/>
+                </h:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                        <ice:outputText value="Solicitante"/>
+                </f:facet>
+                <h:commandLink action="ver-reserva">
+                    <f:setPropertyActionListener value="#{reserva}" target="#{micspc.reserva}" />
+                    <ice:outputText value="#{reserva.solicitante.apellidos}, #{reserva.solicitante.nombre}" style="font-weight:bold;text-decoration: underline;"/>
+                </h:commandLink>
+            </ice:column>
+
+
+            <ice:column>
+
+                <f:facet name="header">
+                        <ice:outputText value="Estado"/>
+                </f:facet>
+                <h:commandLink action="ver-reserva">
+                    <f:setPropertyActionListener value="#{reserva}" target="#{micspc.reserva}" />
+                    <ice:outputText value="#{reserva.estado}" style="font-weight:bold;text-decoration: underline;"/>
+                </h:commandLink>
+            </ice:column>
+        </ice:dataTable>
+</html>

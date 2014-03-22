@@ -1,0 +1,150 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/templates/descripcionTecnica.xhtml">
+
+        <ui:define name="titulo">Servicios Cientifico-Técnicos IACT (#{anaxrf.tecnica.nombre})</ui:define>
+
+        <ui:define name="nombreTecnica">
+            #{anaxrf.tecnica.nombre}
+        </ui:define>
+
+        <ui:define name="responsables">
+            <table class="listado">
+                <tr class="listado"><th class="listado">Científico</th><th class="listado">Técnico</th></tr>
+                <tr class="listado"><td class="listado">#{anaxrf.tecnica.responsableCientifico.apellidos}, #{anaxrf.tecnica.responsableCientifico.nombre}</td><td class="listado">#{anaxrf.tecnica.responsableTecnico.apellidos}, #{anaxrf.tecnica.responsableTecnico.nombre}</td></tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="trabajopendiente">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Fecha</th>
+                    <th class="listado">Nº Orden</th>
+                    <th class="listado">Proyecto</th>
+                    <th class="listado">Estado</th>
+                </tr>
+                <ui:repeat value="#{anaxrf.ordenTrabajoLaboratorioPendientesItems}" var="olPendiente">
+                    <tr class="listado">
+                        <td class="listado">
+                    <h:outputText value="#{olPendiente.fechasolicitud}">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    </td>
+                    <td class="listado">#{olPendiente.numordentrabajo}</td>
+                    <td class="listado">#{olPendiente.proyecto.referencia}</td>
+                    <td class="listado">#{olPendiente.estado}</td>
+                    </tr>
+                </ui:repeat>
+
+            </table>
+        </ui:define>
+
+        <ui:define name="tecnicos">
+            <table>
+                <tr>
+                    <td>Técnico responsable:</td>
+                    <td><h:outputText value="#{anaxrf.tecnica.responsableTecnico.apellidos}, #{anaxrf.tecnica.responsableTecnico.nombre}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><h:outputText value="#{anaxrf.tecnica.ubicacion}"  style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><h:outputText value="#{anaxrf.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><h:outputText value="#{anaxrf.tecnica.responsableTecnico.contratoActual.EMail}" style="font-style: italic;"/></td>
+                </tr>
+            </table>
+            <br/><br/>
+            <table>
+                <tr>
+                    <td>Técnico:</td>
+                    <td><h:outputText value="López Cubero, Leticia" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Ubicación:</td>
+                    <td><h:outputText value="#{anaxrf.tecnica.ubicacion}"  style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td><h:outputText value="#{anaxrf.tecnica.telefono}" style="font-style: italic;"/></td>
+                </tr>
+                <tr>
+                    <td>eMail:</td>
+                    <td><h:outputText value="leticiacubero@iact.ugr-csic.es" style="font-style: italic;"/></td>
+                </tr>
+            </table>
+        </ui:define>
+
+        <ui:define name="instalacion">
+            <p>
+                De manera general, la espectroscopía de fluorescencia de rayos X
+                (XRF) utiliza radiación primaria  de un tubo de rayos X para excitar
+                la emisión de rayos X secundarios (fluorescencia) en una muestra.
+                La radiación procedente de la muestra incluye los picos de rayos X
+                característicos de los elementos, mayores y traza, presentes en la muestra,
+                producidos por los saltos de los electrones entre los niveles de energía
+                más internos de los átomos. En un espectrómetro de Fluorescencia de Rayos
+                X por dispersión de longitud de onda (WDXRF), estos rayos son colimados
+                en un haz paralelo y dispersados en un espectro por medio de la difracción
+                en un cristal analizador, pasando después a un detector.
+            </p>
+            <p>
+                El laboratorio está equipado con un espectrómetro secuencial de fluorescencia
+                de rayos X de dispersión por longitud de onda (WDXRF), S4 Pioneer de BRUKER,
+                con una potencia máxima de 4 kW. El instrumento está provisto de un tubo de
+                rayos X de ánodo de Rh (60 kV, 150 mA); tres cristales analizadores (OVO-55,
+                LiF 200 y PET); un colimador de 0.23º y otro de 0.46; filtros de Pb, Cu, y Al;
+                un contador proporcional de flujo para la detección de los elementos ligeros y
+                un contador de centelleo para los pesados. La Inteligencia Analítica Integrada
+                (IAI) de SPECTRAplus, la solución de software XRF para la calibración, la
+                evaluación y la preparación de informes, permite el arranque fácil de calibraciones,
+                paso por paso, suministrando parámetros de medida optimizados y permite realizar
+                fácilmente las operaciones de rutina. La evaluación sin estándar integrada para
+                todo tipo de muestra como rocas, minerales, metales, hidrocarburos y cualquier
+                tipo de producto industrial ofrece la determinación rápida y fácil de concentraciones
+                de elementos del 100 % hasta el rango ppm sin necesidad de realizar una calibración.
+            </p>
+            <p>Para la preparación de muestras el laboratorio cuenta con:</p>
+            <p>
+            <ul>
+                <li>Prensa hidráulica automática,  marca NANNETTI y modelo MIGNON S, para la preparación de muestras en forma de pastillas prensadas. </li>
+                <li>Perladora, marca Fluxana-HD Elektronik, modelo Vulcan 4M, para la preparación de muestras en forma de perlas fundidas</li>
+                <li>Balanza de precisión, marca AND, modelo GF200</li>
+            </ul>
+        </p>
+        </ui:define>
+
+        <ui:define name="precios">
+            <table class="listado">
+                <tr class="listado">
+                    <th class="listado">Código</th>
+                    <th class="listado">Tarea</th>
+                    <th class="listado">IACT</th>
+                    <th class="listado">OPI</th>
+                    <th class="listado">OTROS</th>
+                    <th class="listado">Máximo número de muestras por turno</th>
+                </tr>
+                <ui:repeat value="#{anaxrf.tecnica.trabajos}" var="tarea">
+                    <tr class="listado">
+                        <td class="listado"><h:outputText value="#{tarea.codigo}"/></td>
+                    <td class="listado"><h:outputText value="#{tarea.concepto}"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualCsic}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualOpi}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.precioActualExterno}" converter="EuroCurrencyConverter"/></td>
+                    <td class="numero"><h:outputText value="#{tarea.tiempoRelativo}"/></td>
+                    </tr>
+                </ui:repeat>
+            </table>
+        </ui:define>
+
+
+
+    </ui:composition>
+</html>

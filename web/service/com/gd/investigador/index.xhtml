@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ice:commandButton action="#{comgd.rellenarOrdenTrabajoSetup}" value="Nueva solicitud de trabajo" />
+
+        <br/>
+        <h3>Mis ordenes de trabajo</h3>
+
+
+        <ice:dataTable
+            value="#{comgd.ordenTrabajoLaboratorioDibujoItems}"
+            var="ordenTrabajo"
+            id="Tabla"
+            sortColumn="#{comgd.columnaFiltro}"
+            sortAscending="#{comgd.ascendente}">
+
+            <ice:column>
+
+                <f:facet name="header" >
+
+                    <ice:commandSortHeader id="regionHeader"
+                                           columnName="fechasolicitud" >
+                        <ice:outputText value="Fecha de solicitud" style="text-decoration: underline;"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+                <ice:commandLink  action="#{comgd.verOrdenTrabajoLab}">
+                    <f:setPropertyActionListener value="#{ordenTrabajo}" target="#{comgd.ordenTrabajoDibujo}" />
+
+                    <ice:outputText value="#{ordenTrabajo.fechasolicitud}" style="font-weight:bold;text-decoration: underline;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </ice:outputText>
+                </ice:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader1432"
+                                           columnName="numordentrabajo" >
+                        <ice:outputText value="Nº Orden Trabajo"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:commandLink value="#{ordenTrabajo.numordentrabajo}" action="#{comgd.verOrdenTrabajoLab}" style="font-weight:bold;text-decoration: underline;">
+                    <f:setPropertyActionListener value="#{ordenTrabajo}" target="#{comgd.ordenTrabajoDibujo}" />
+                </ice:commandLink>
+            </ice:column>
+
+
+            <ice:column>
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader11"
+                                           columnName="nombre" >
+                        <ice:outputText value="Nombre"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:commandLink value="#{ordenTrabajo.nombre}" action="#{comgd.verOrdenTrabajoLab}" style="font-weight:bold;text-decoration: underline;">
+                    <f:setPropertyActionListener value="#{ordenTrabajo}" target="#{comgd.ordenTrabajoDibujo}" />
+                </ice:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader15"
+                                           columnName="proyecto.referencia" >
+                        <ice:outputText value="Proyecto"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:outputText value="#{ordenTrabajo.proyecto.referencia}" />
+            </ice:column>
+
+
+
+            <ice:column >
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader2"
+                                           columnName="estado" >
+                        <ice:outputText value="Estado"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+                <ice:commandLink value="#{ordenTrabajo.estado}" action="#{comgd.verOrdenTrabajoLab}" style="font-weight:bold;text-decoration: underline;">
+                    <f:setPropertyActionListener value="#{ordenTrabajo}" target="#{comgd.ordenTrabajoDibujo}" />
+                </ice:commandLink>
+
+
+            </ice:column>
+
+        </ice:dataTable>
+        
+    </body>
+</html>

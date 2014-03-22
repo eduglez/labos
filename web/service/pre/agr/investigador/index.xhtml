@@ -1,0 +1,131 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <body>
+
+        <ice:commandButton action="#{preagr.rellenarOrdenTrabajoSetup}" value="Nueva solicitud de trabajo" />
+        
+        <br/>
+        <h3>Mis ordenes de trabajo</h3>
+
+
+        <ice:dataTable
+            value="#{preagr.ordenTrabajoLaboratorioItemsWrapped}"
+            var="wrp"
+            id="Tabla"
+            sortColumn="#{preagr.columnaFiltro}"
+            sortAscending="#{preagr.ascendente}">
+
+            <ice:column>
+
+                <f:facet name="header" >
+
+                    <ice:commandSortHeader id="regionHeader"
+                                           columnName="fechasolicitud" >
+                        <ice:outputText value="Fecha de solicitud" style="text-decoration: underline;"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+                <ice:commandLink  action="#{preagr.verOrdenTrabajoLab}">
+                    <f:setPropertyActionListener value="#{wrp.ordenTrabajo}" target="#{preagr.ordenTrabajoLab}" />
+
+                    <ice:outputText value="#{wrp.ordenTrabajo.fechasolicitud}" style="font-weight:bold;text-decoration: underline;">
+                        <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                    </ice:outputText>
+                </ice:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader1432"
+                                           columnName="numordentrabajo" >
+                        <ice:outputText value="Nº Orden Trabajo"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:commandLink value="#{wrp.ordenTrabajo.numordentrabajo}" action="#{preagr.verOrdenTrabajoLab}" style="font-weight:bold;text-decoration: underline;">
+                    <f:setPropertyActionListener value="#{wrp.ordenTrabajo}" target="#{preagr.ordenTrabajoLab}" />
+                </ice:commandLink>
+            </ice:column>
+
+
+            <ice:column>
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader11"
+                                           columnName="nombre" >
+                        <ice:outputText value="Nombre"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:commandLink value="#{wrp.ordenTrabajo.nombre}" action="#{preagr.verOrdenTrabajoLab}" style="font-weight:bold;text-decoration: underline;">
+                    <f:setPropertyActionListener value="#{wrp.ordenTrabajo}" target="#{preagr.ordenTrabajoLab}" />
+                </ice:commandLink>
+            </ice:column>
+
+            <ice:column>
+
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader15"
+                                           columnName="proyecto.referencia" >
+                        <ice:outputText value="Proyecto"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+
+                <ice:outputText value="#{wrp.ordenTrabajo.proyecto.referencia}" />
+            </ice:column>
+
+
+
+            <ice:column >
+                <f:facet name="header">
+                    <ice:commandSortHeader id="regionHeader2"
+                                           columnName="estado" >
+                        <ice:outputText value="Estado"/>
+                    </ice:commandSortHeader>
+                </f:facet>
+                <table>
+                    <tr>
+                        <td><ice:commandLink value="#{wrp.ordenTrabajo.estado}" action="#{preagr.verOrdenTrabajoLab}" style="font-weight:bold;text-decoration: underline;">
+                                <f:setPropertyActionListener value="#{wrp.ordenTrabajo}" target="#{preagr.ordenTrabajoLab}" />
+                            </ice:commandLink>
+                        </td>
+                        <td><ice:outputResource resource="#{wrp.primerResultado}" label="Resultados" attachment="true" image="/css/ExcelDownload.png" rendered="#{wrp.primerResultado != null}"/></td>
+                    </tr>
+                </table>
+
+
+            </ice:column>
+
+        </ice:dataTable>
+        <br/>
+        <h3>Trabajos pendientes en el servicio</h3>
+        <table border="1">
+            <tr>
+                <th style="text-align:left;border-style:hidden;">Fecha</th>
+                <th style="text-align:left;border-style:hidden;">Nº Orden</th>
+                <th style="text-align:left;border-style:hidden;">Proyecto</th>
+                <th style="text-align:left;border-style:hidden;">Estado</th>
+            </tr>
+            <ui:repeat value="#{preagr.ordenTrabajoLaboratorioPendientesItems}" var="olPendiente">
+                <tr>
+                    <td style="border-style:hidden;">
+                        <ice:outputText value="#{olPendiente.fechasolicitud}" style="font-size:small;">
+                            <f:convertDateTime timeZone="Europe/Paris" pattern="dd/MM/yyyy" />
+                        </ice:outputText>
+                    </td>
+                    <td style="border-style:hidden;"><ice:outputText value="#{olPendiente.numordentrabajo}" style="font-size:xsmall;"/></td>
+                    <td style="border-style:hidden;"><ice:outputText value="#{olPendiente.proyecto.referencia}" style="font-size:small;"/></td>
+                    <td style="border-style:hidden;"><ice:outputText value="#{olPendiente.estado}" style="font-size:small;"/></td>
+                </tr>
+            </ui:repeat>
+
+        </table>
+
+
+
+    </body>
+</html>

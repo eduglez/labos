@@ -1,0 +1,708 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+
+    
+    <navigation-rule>
+        <from-view-id>/service/geo/prc/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/geo/prc/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/geo/prc/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/geo/prc/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/geo/prc/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/geo/prc/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>/service/geo/sw/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/geo/sw/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/geo/sw/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/geo/sw/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/geo/sw/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/geo/sw/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>/service/com/inf/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/com/inf/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/com/inf/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/com/inf/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/com/inf/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/com/inf/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/service/ana/xrd/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/ana/xrd/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/xrd/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/xrd/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/xrd/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/ana/xrd/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/service/ana/xrf/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/ana/xrf/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/xrf/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/xrf/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/xrf/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/ana/xrf/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/service/ana/sed/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/ana/sed/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/sed/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/sed/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/sed/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/ana/sed/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/service/ana/gtk/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/ana/gtk/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/gtk/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/gtk/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/gtk/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/ana/gtk/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/service/ana/cs/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/ana/cs/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/cs/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/cs/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/cs/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/ana/cs/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/service/ana/icp/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/ana/icp/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/icp/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/icp/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/ana/icp/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/ana/icp/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/service/pre/lam/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/pre/lam/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/lam/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/lam/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/lam/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/pre/lam/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/service/pre/mol/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/pre/mol/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/mol/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/mol/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/mol/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/pre/mol/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    
+    <navigation-rule>
+        <from-view-id>/service/pre/agr/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/pre/agr/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/agr/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/agr/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/agr/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/pre/agr/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/service/pre/geo/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/pre/geo/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/geo/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/geo/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/pre/geo/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/pre/geo/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/service/com/gd/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/com/gd/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/com/gd/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/com/gd/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/com/gd/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/service/mic/ram/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/mic/ram/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-reserva</from-outcome>
+            <to-view-id>/service/mic/ram/rellenarreserva.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-reserva</from-outcome>
+            <to-view-id>/service/mic/ram/revisarreserva.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-reserva</from-outcome>
+            <to-view-id>/service/mic/ram/verreserva.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-reservas</from-outcome>
+            <to-view-id>/service/mic/ram/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/service/mic/opt/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/mic/opt/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-reserva</from-outcome>
+            <to-view-id>/service/mic/opt/rellenarreserva.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-reserva</from-outcome>
+            <to-view-id>/service/mic/opt/revisarreserva.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-reserva</from-outcome>
+            <to-view-id>/service/mic/opt/verreserva.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-reservas</from-outcome>
+            <to-view-id>/service/mic/opt/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/service/man/edi/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/man/edi/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/man/edi/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/man/edi/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/man/edi/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/man/edi/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/service/man/veh/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>ver-descripcion</from-outcome>
+            <to-view-id>/service/man/veh/descripcion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>rellenar-orden-trabajo</from-outcome>
+            <to-view-id>/service/man/veh/rellenarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>revisar-orden-trabajo</from-outcome>
+            <to-view-id>/service/man/veh/revisarordentrabajo.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>ver-orden-trabajo</from-outcome>
+            <to-view-id>/service/man/veh/verordentrabajo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>listar-ordenes-trabajo</from-outcome>
+            <to-view-id>/service/man/veh/index.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/service/permisos/otorgados/*</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>ver-permisos-otorgados</from-outcome>
+            <to-view-id>/service/permisos/otorgados/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+    </navigation-rule>
+        
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>ver-permisos-otorgados</from-outcome>
+            <to-view-id>/service/permisos/otorgados/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ver-permisos-recibidos</from-outcome>
+            <to-view-id>/service/permisos/recibidos/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>tecnica-geoprc</from-outcome>
+            <to-view-id>/service/geo/prc/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>tecnica-geosw</from-outcome>
+            <to-view-id>/service/geo/sw/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>tecnica-xrd</from-outcome>
+            <to-view-id>/service/ana/xrd/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>tecnica-xrf</from-outcome>
+            <to-view-id>/service/ana/xrf/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>tecnica-sedigraph</from-outcome>
+            <to-view-id>/service/ana/sed/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>tecnica-anagtk</from-outcome>
+            <to-view-id>/service/ana/gtk/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>tecnica-cs</from-outcome>
+            <to-view-id>/service/ana/cs/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        
+        
+        <navigation-case>
+            <from-outcome>tecnica-anaicp</from-outcome>
+            <to-view-id>/service/ana/icp/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>tecnica-prelam</from-outcome>
+            <to-view-id>/service/pre/lam/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>tecnica-comgd</from-outcome>
+            <to-view-id>/service/com/gd/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>tecnica-premol</from-outcome>
+            <to-view-id>/service/pre/mol/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>tecnica-preagr</from-outcome>
+            <to-view-id>/service/pre/agr/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>tecnica-pregeo</from-outcome>
+            <to-view-id>/service/pre/geo/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>tecnica-micspc</from-outcome>
+            <to-view-id>/service/mic/ram/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>tecnica-micopt</from-outcome>
+            <to-view-id>/service/mic/opt/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>tecnica-cominf</from-outcome>
+            <to-view-id>/service/com/inf/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>tecnica-manedi</from-outcome>
+            <to-view-id>/service/man/edi/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>tecnica-manveh</from-outcome>
+            <to-view-id>/service/man/veh/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+
+</faces-config>
