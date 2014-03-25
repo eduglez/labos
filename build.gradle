@@ -1,0 +1,18 @@
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+	flatDir { dirs "lib/ext" }
+}
+
+dependencies {
+    compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+}
+
+war {
+    //from 'src/rootContent' // adds a file-set to the root of the archive
+    webInf { from 'src/additionalWebInf' } // adds a file-set to the WEB-INF dir.
+    classpath fileTree('lib/ext') // adds a file-set to the WEB-INF/lib dir.
+    //classpath configurations.moreLibs // adds a configuration to the WEB-INF/lib dir.
+    webXml = file('src/myWeb.xml') // copies a file to WEB-INF/web.xml
+}
